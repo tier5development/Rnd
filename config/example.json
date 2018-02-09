@@ -1,0 +1,11 @@
+{
+	"dbConn" : {
+		"host"       : "",
+		"port"       : "",
+		"user"       : "",
+		"password"   : "",
+		"database"   : "",
+		"debug"      : true // true or false
+	}
+
+}
