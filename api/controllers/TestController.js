@@ -28,7 +28,7 @@ module.exports = {
   		// set the parameter for the request message
 		const configs = {
 		    method: 'GET',
-		    path: '/v2//v2/prices/:LTC-USD/spot',
+		    path: '/v2/prices/BTC-USD/spot',
 		    body: ''
 		};
 	
@@ -55,7 +55,14 @@ module.exports = {
 		request(options,function(err, response){
 		    if (err) console.log(err);
 		    console.log(response.body);
-		    return res.send(response.body);
+		console.log(response.body);
+	
+		var body = JSON.parse(response.body);		
+		console.log(body);
+
+		var cf = '{ "messages": [   {"text": "'+body.data.base +'"},   {"text": "What are you up to?"} ]}';
+
+	    return res.send(cf);
 		});
     }
 	
