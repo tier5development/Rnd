@@ -60,7 +60,7 @@ module.exports = {
 		var body = JSON.parse(response.body);		
 		console.log(body);
 
-		var cf = '{ "messages": [   {"The current price of 1 ": "'+body.data.base +' is $'+body.data.amount +'"},   {"text": "What are you up to?"} ]}';
+		var cf = '{ "messages": [   {"The current price of 1 ": '+body.data.base +' is $'+body.data.amount +'"},   {"text": "What are you up to?"} ]}';
 
 	    return res.send(cf);
 		});
