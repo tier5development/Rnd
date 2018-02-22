@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   'GET /api/v1': 'MainController.getData',
-   'GET /api/v1': 'MainController.getData2',
+   'GET /api/v1/new': 'MainController.getData2',
 
   /***************************************************************************
   *                                                                          *
