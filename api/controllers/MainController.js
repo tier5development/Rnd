@@ -30,6 +30,13 @@ module.exports = {
 		    path: '/v2/exchange-rates?currency=USD',
 		    body: ''
 		};
+	getData2: function (req, res) {
+  		// set the parameter for the request message
+		const configs = {
+		    method: 'GET',
+		    path: '/v2/exchange-rates?currency=USD',
+		    body: ''
+		};
 
 		const message = timestamp + configs.method + configs.path + configs.body;
 		console.log(message);
