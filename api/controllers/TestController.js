@@ -28,7 +28,7 @@ module.exports = {
   		// set the parameter for the request message
 		const configs = {
 		    method: 'GET',
-		    path: '/v2/exchange-rates?currency=USD',
+		    path: '/v2//v2/prices/:LTC-USD/spot',
 		    body: ''
 		};
 	
