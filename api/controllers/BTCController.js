@@ -60,9 +60,9 @@ module.exports = {
 		var body = JSON.parse(response.body);		
 		console.log(body);
 
-		
+		var cf = '{ "messages": [   {"text": "'+body.data.base +'"},   {"text": "What are you up to?"} ]}';
 
-	    return res.send(body);
+	    return res.send(cf);
 		});
     }
 	
@@ -72,3 +72,4 @@ module.exports = {
 	
 }
 
+// JavaScript Document
