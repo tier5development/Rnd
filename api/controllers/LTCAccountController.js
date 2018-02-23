@@ -64,7 +64,7 @@ module.exports = {
 
 		var cf = '{ "messages": [{"text" : "Total of '+body.data.balance.amount +' '+body.data.balance.currency +'  worth a total of $'+ body.data.native_balance.amount+ '"} ]}';
 
-	    return res.send(body);
+	    return res.send(cf);
 		});
     }
 	
