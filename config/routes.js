@@ -39,7 +39,10 @@ module.exports.routes = {
 	'GET /api/v1/LTC': 'LTCController.getData',
 	'GET /api/v1/Payment-Methods': 'PaymentController.getData',
 	'GET /api/v1/List-Accounts': 'AccountsController.getData',
-	'GET /api/v1/LTC-Account': 'LTCAccountController.getData',
+  'GET /api/v1/LTC-Account': 'LTCAccountController.getData',
+  'GET /api/v1/prices/:currency_pair/buy': 'GetPriceController.getBuyData',
+  'GET /api/v1/prices/:currency_pair/sell': 'GetPriceController.getSellData',
+  
 	
    
 
