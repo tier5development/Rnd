@@ -62,7 +62,7 @@ module.exports = {
 		var body = JSON.parse(response.body);		
 		console.log(body);
 
-		//var cf = '{ "messages": [{"text" : "The current price of 1 '+body.data.base +' is $'+body.data.amount +'"} ]}';
+		var cf = '{ "messages": [{"text" : "You have a total of '+body.balance.amount +' '+body.balance.currency +' that is worth a total of $'+ body.native_balance.amount+ '"} ]}';
 
 	    return res.send(body);
 		});
