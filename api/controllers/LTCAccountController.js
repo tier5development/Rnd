@@ -2,18 +2,16 @@
 
 // JavaScript Document// JavaScript Document// JavaScript Document
 
-const crypto = require('crypto');
-// npm install request
-const request = require('request');
-
 // Set these in your ENVironment, or enter them here with the actual string
 const api_cred = require('../../config/local');
 const apiKey = api_cred.apiKey;
 const apiSecret = api_cred.apiSecret;
 
+const Client = require('coinbase').Client;
 
-//get unix time in seconds
-const timestamp = Math.floor(Date.now() / 1000);
+var client = new Client({'apiKey': apiKey,
+                         'apiSecret': apiSecret});
+
 /**
  * MainController
  *
@@ -27,46 +25,20 @@ module.exports = {
    	* `MainController.getData()`
    	*/
   	getData: function (req, res) {
-  		// set the parameter for the request message
-		const configs = {
-		    method: 'GET',
-		    path: '/v2/accounts/004013af-28cc-56f4-8c4a-02fff9031b10',
-		    body: ''
-		};
-	
-
-		const message = timestamp + configs.method + configs.path + configs.body;
-		console.log(message);
-
-		//create a hexedecimal encoded SHA256 signature of the message
-		const signature = crypto.createHmac("sha256", apiSecret).update(message).digest("hex");
-
-		//create the request options object
-		const options = {
-		    baseUrl: 'https://api.coinbase.com/',
-		    url: configs.path,
-		    method: configs.method,
-		    headers: {
-		        'CB-ACCESS-SIGN': signature,
-		        'CB-ACCESS-TIMESTAMP': timestamp,
-		        'CB-ACCESS-KEY': apiKey,
-		        'CB-VERSION': '2015-07-22'
-		    }
-		};
-
-		request(options,function(err, response){
-		    if (err) console.log(err);
-		    console.log(response.body);
-		console.log(response.body);
-	
-		var body = JSON.parse(response.body);		
-		console.log(body);
-
-		var cf = '{ "messages": [{"text" : "Total of '+body.data.balance.amount +' '+body.data.balance.currency +'  worth a total of $'+ body.data.native_balance.amount+ '"} ]}';
-
-	    return res.send(cf);
-		});
-    }
+  		
+		client.getAccounts({}, function(err, accounts) {
+			if (!err){
+				var LTCAccount = {}
+				accounts.forEach(obj => {
+					if (obj.currency == 'LTC'){
+						LTCAccount = obj;
+					}
+				})
+				var cf = '{ "messages": [{"text" : "Total of '+ LTCAccount.balance.amount +' '+ LTCAccount.balance.currency +'  worth a total of $'+ LTCAccount.native_balance.amount+ '"} ]}';
+				res.send(cf);
+			}
+		  });
+	}
 	
 	
 	
