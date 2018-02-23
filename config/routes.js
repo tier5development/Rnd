@@ -37,6 +37,7 @@ module.exports.routes = {
 	'GET /api/v1/BTC': 'BTCController.getData',
 	'GET /api/v1/ETH': 'ETHController.getData',
 	'GET /api/v1/LTC': 'LTCController.getData',
+	'GET /api/v1/Payment-Methods': 'PaymentController.getData',
 	
    
 
