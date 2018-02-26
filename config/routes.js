@@ -40,10 +40,19 @@ module.exports.routes = {
 	'GET /api/v1/Payment-Methods': 'PaymentController.getData',
 	'GET /api/v1/List-Accounts': 'AccountsController.getData',
   'GET /api/v1/LTC-Account': 'LTCAccountController.getData',
-  'GET /api/v1/prices/:currency_pair/buy': 'GetPriceController.getBuyData',
-  'GET /api/v1/prices/:currency_pair/sell': 'GetPriceController.getSellData',
-	'GET /api/v1/test': 'CoinBaseController.justTestFunction',
-	'GET /api/v1/buy-price': 'CoinBaseController.getBuyPrice',
+  'GET /api/v1/price/buy': 'CoinbaseController.getBuyData',
+  'GET /api/v1/price/sell': 'CoinbaseController.getSellData',
+  'GET /api/v1/price/spot': 'CoinbaseController.getSpotData',
+
+
+
+
+  
+  
+
+	
+  
+  
 	
   
 	
