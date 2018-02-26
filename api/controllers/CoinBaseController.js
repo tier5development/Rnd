@@ -16,7 +16,7 @@ module.exports = {
             var cp = req.query['cp'];
             client.getBuyPrice({'currencyPair': cp}, function(err, price) {
             if (!err){
-                var textString = ` For 1 ${price.data.base} you'll have to pay ${price.data.amount} ${price.data.currency}`;  
+                var textString = ` ${price.data.base} buy price: ${price.data.amount} ${price.data.currency}`;  
                 var cf = {
                     messages: [
                         {
@@ -42,7 +42,7 @@ module.exports = {
             var cp = req.query['cp'];
             client.getSellPrice({'currencyPair': cp}, function(err, price) {
             if (!err){
-                var textString = ` For 1 ${price.data.base} you'll get  ${price.data.amount} ${price.data.currency} if you sell right now!`;  
+                var textString = ` ${price.data.base} sell price:  ${price.data.amount} ${price.data.currency} `;  
                 var cf = {
                     messages: [
                         {
