@@ -43,6 +43,15 @@ module.exports.routes = {
   'GET /api/v1/price/buy': 'CoinbaseController.getBuyData',
   'GET /api/v1/price/sell': 'CoinbaseController.getSellData',
   'GET /api/v1/price/spot': 'CoinbaseController.getSpotData',
+  'GET /api/v1/accounts/list': 'CoinbaseController.listAccounts',
+  'GET /api/v1/accounts/usd': 'CoinbaseController.listUSD',
+
+
+  'GET /api/v1/test': 'CoinbaseController.testdata',
+
+
+
+  
 
 
 
