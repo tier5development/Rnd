@@ -15,6 +15,12 @@ module.exports = {
 		
 		var cf = req.query['test'];
 		return res.json(cf);
+	},
+	
+	getBuyPrice : function(req, res){
+		var cp = req.query['cp'];
+		client.getBuyPrice({'currencyPair': '${cp}'}, function(err, price) {
+  		console.log(price);
 	}
 	
 }
