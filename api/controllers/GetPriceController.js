@@ -25,7 +25,7 @@ module.exports = {
    	* `MainController.getData()`
    	*/
   	getBuyData: function (req, res) {
-            var currencyPair = req.params.currency_pair | 'BTC-USD'
+            var currencyPair = req.params.currency_pair | 'BTC-USD';
             client.getBuyPrice({'currencyPair': currencyPair}, function(err, price) {
             if (!err){
                 var textString = `You have to pay ${price.data.amount} ${price.data.currency} to buy`;  
