@@ -18,9 +18,7 @@ module.exports = {
 	},
 	
 	getBuyPrice : function(req, res){
-		var cp = req.query['cp'];
-		client.getBuyPrice({'currencyPair': '${cp}'}, function(err, price) {
-  		console.log(price);
+		console.log("here i am");
 	});
 	
 }
