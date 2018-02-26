@@ -140,6 +140,106 @@ module.exports = {
          
 		});
     },
+    listBTC: function(req, res){
+    	client.getAccount("c3bbf6ef-f229-5a74-8d3b-c74a776a7588", function(err, account) {
+  			if (!err){
+                var textString = `BTC Wallet Balance: ${account.balance.amount}  ${account.balance.currency} with a total value of $${account.native_balance.amount} `;  
+                var cf = {
+                    messages: [
+                        {
+                            text : textString
+                        }
+                    ]
+                }
+                return res.json(cf);
+            } else {
+                var cf = {
+                    messages: [
+                        {
+                            text : 'Something Went Wrong!'
+                        }
+                    ]
+                }
+                return res.json(cf);
+            }
+         
+		});
+    },
+    listBCH: function(req, res){
+    	client.getAccount("898da654-3420-59de-b303-966dee0991c5", function(err, account) {
+  			if (!err){
+                var textString = `BCH Wallet Balance: ${account.balance.amount}  ${account.balance.currency} with a total value of $${account.native_balance.amount} `;  
+                var cf = {
+                    messages: [
+                        {
+                            text : textString
+                        }
+                    ]
+                }
+                return res.json(cf);
+            } else {
+                var cf = {
+                    messages: [
+                        {
+                            text : 'Something Went Wrong!'
+                        }
+                    ]
+                }
+                return res.json(cf);
+            }
+         
+		});
+    },
+    listETH: function(req, res){
+    	client.getAccount("e2ff8352-08c5-536f-8c34-7931cad11eb6", function(err, account) {
+  			if (!err){
+                var textString = `ETH Wallet Balance: ${account.balance.amount}  ${account.balance.currency} with a total value of $${account.native_balance.amount} `;  
+                var cf = {
+                    messages: [
+                        {
+                            text : textString
+                        }
+                    ]
+                }
+                return res.json(cf);
+            } else {
+                var cf = {
+                    messages: [
+                        {
+                            text : 'Something Went Wrong!'
+                        }
+                    ]
+                }
+                return res.json(cf);
+            }
+         
+		});
+    },
+    listLTC: function(req, res){
+    	client.getAccount("004013af-28cc-56f4-8c4a-02fff9031b10", function(err, account) {
+  			if (!err){
+                var textString = `LTC Wallet Balance: ${account.balance.amount}  ${account.balance.currency} with a total value of $${account.native_balance.amount} `;  
+                var cf = {
+                    messages: [
+                        {
+                            text : textString
+                        }
+                    ]
+                }
+                return res.json(cf);
+            } else {
+                var cf = {
+                    messages: [
+                        {
+                            text : 'Something Went Wrong!'
+                        }
+                    ]
+                }
+                return res.json(cf);
+            }
+         
+		});
+    },
 
     
 

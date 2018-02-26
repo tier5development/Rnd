@@ -45,6 +45,11 @@ module.exports.routes = {
   'GET /api/v1/price/spot': 'CoinbaseController.getSpotData',
   'GET /api/v1/accounts/list': 'CoinbaseController.listAccounts',
   'GET /api/v1/accounts/usd': 'CoinbaseController.listUSD',
+  'GET /api/v1/accounts/btc': 'CoinbaseController.listBTC',
+  'GET /api/v1/accounts/bch': 'CoinbaseController.listBCH',
+  'GET /api/v1/accounts/eth': 'CoinbaseController.listETH',
+  'GET /api/v1/accounts/ltc': 'CoinbaseController.listLTC',
+
 
 
   'GET /api/v1/test': 'CoinbaseController.testdata',
