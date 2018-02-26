@@ -49,6 +49,10 @@ module.exports.routes = {
   'GET /api/v1/accounts/bch': 'CoinbaseController.listBCH',
   'GET /api/v1/accounts/eth': 'CoinbaseController.listETH',
   'GET /api/v1/accounts/ltc': 'CoinbaseController.listLTC',
+  'GET /api/v1/store/api-keys': 'CoinbaseController.storeAPIkeys',
+
+
+  
 
 
 

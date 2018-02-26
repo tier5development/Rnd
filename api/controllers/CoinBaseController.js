@@ -241,6 +241,21 @@ module.exports = {
 		});
     },
 
+    storeAPIkeys : function(req, res){
+    		var id = req.query['messenger user id'];
+    		var cfid = req.query['chatfuel user id'];
+    		var textString = `Messenger User ID: ${id} Chatfuel User ID: ${cfid}`;
+    		var cf = {
+                    messages: [
+                        {
+                            text : textString
+                        }
+                    ]
+                }
+            return res.json(cf);
+
+    }
+
     
 
 
