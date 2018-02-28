@@ -5,6 +5,8 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "async-polling": "^0.2.1",
+    "axios": "^0.18.0",
     "coinbase": "^2.0.7",
     "crypto": "^1.0.1",
     "ejs": "2.3.4",
@@ -31,7 +33,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "dev":"nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "main": "app.js",
   "repository": {
