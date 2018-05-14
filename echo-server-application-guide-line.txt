@@ -1,0 +1,123 @@
+
+/**
+ * Steps for running the Echo Server APP successfully
+ */
+
+/**
+ * Step 1: Install laravel 
+ */
+
+
+Command: composer create-project --prefer-dist laravel/laravel echo-test
+
+/**
+ * Step 2: Install laravel puser 
+ */
+
+
+Command: composer require pusher/pusher-php-server "~3.0"
+
+
+/**
+ * Step 3: Install laravel echo server
+ */
+
+
+Command: npm install -g laravel-echo-server
+
+
+/**
+ * Step 4:  Initialize the socket server
+ */
+
+
+Command: laravel-echo-server init
+
+This command will start asking you some questions about the configuration of your socket server, fill these in according to your installation:
+
+Q1. Development mode? Yes
+Q2. Which port? 6001
+Q3. Which database? redis
+Q4. Host of authentication server? http://echo-server.test
+Q5. Will serving on HTTP or HTTPS? HTTP
+Q6. Client ID/Key for HTTP API? No
+Q7. Cross domain access to the API? No
+
+
+/**
+ * Step 5:  Start the laravel echo server
+ */
+
+
+Command: laravel-echo-server start
+
+
+
+/**
+ * Step 6:  Configuring the laravel to work with the echo server
+ */
+
+
+Open up your config/app.php file and uncomment the BroadcastServiceProvider
+
+
+/**
+ * Step 7:  Install socket io client 
+ */
+
+
+Command: npm install --save socket.io-client
+Command: npm install --save laravel-echo
+Command: npm install
+
+
+/**
+ * Step 8:  Next open up the resources/assets/js/bootstrap.js file, or the JS file * where you hold all the base JS code. Put the below line of codes or uncomment   * the existing line of codes
+ */
+
+import Echo from 'laravel-echo'
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    encrypted: true
+});
+
+
+
+/**
+ * Step 9:  Create a new event and event listener
+ */
+
+ Command: php artisan event:generate
+
+ I have created a new event called TaskEvent and event listener called TaskEventListener
+
+
+/**
+ * Step 10: Event class should implements ShouldBroadcast
+ */
+
+Example of class how it looks like
+
+class TaskEvent implements ShouldBroadcast
+
+
+/**
+ * Step 11: Event class should implements ShouldBroadcast
+ */
+
+Example of class how it looks like
+
+class TaskEvent implements ShouldBroadcast
+
+/**
+ * Step 12: Event class should implements ShouldBroadcast
+ */
+
+Example of class how it looks like
+
+class TaskEvent implements ShouldBroadcast
