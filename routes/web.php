@@ -26,9 +26,13 @@ Route::get('userlist', 'UserController@userlist');
 Route::get('addarticle', 'ArticleController@articleFormDisplay')->name('articlename');
 Route::post('articleprocess', 'ArticleController@articleFormProcessing')->name('articleprocess');
 
+Route::get('articlelistdisplay','ArticleController@articleListDisplay');
+
+Route::get('/articleedit/{article_id}','ArticleController@articleEdit');
 
 
-Route::get('/edit_user/{id}', ['uses' => 'UserController@edit']);
+
+ Route::get('/edit_user/{id}', ['uses' => 'UserController@edit']);
 /*
 Auth::routes();
  */

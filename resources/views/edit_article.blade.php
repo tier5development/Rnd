@@ -8,15 +8,14 @@
                 <div class="panel-heading">Add Article</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('articleprocess') }}" enctype="multipart/form-data">
-                    {!! Form::open(array('route' => 'employee.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+                    <form class="form-horizontal" method="POST"  enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Title</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="title" value="<?php echo $article_details->title;  ?>" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -30,7 +29,7 @@
                             <label for="email" class="col-md-4 control-label">content</label>
 
                             <div class="col-md-6">
-                                <textarea id="content" class="form-control" name="content" value="{{ old('content') }}" required ></textarea>
+                                <textarea id="content" class="form-control" name="content" value="<?php echo $article_details->content;  ?>" required ></textarea>
 
                                 @if ($errors->has('content'))
                                     <span class="help-block">

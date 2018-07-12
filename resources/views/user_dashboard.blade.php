@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <a href="/addarticle" class="btn btn-primary">
+                                <a href="/Rnd/addarticle" class="btn btn-primary">
                                     Add Article
                                 </a>
 

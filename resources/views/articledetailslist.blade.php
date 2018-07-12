@@ -13,31 +13,24 @@
                                     <th>Title</th>
                                     <th>Image</th>
                                     <th>Excerpt</th>
+                                     <th>Created</th>
                                     <th>Action</th>
 
                                 </tr>
-                                <?php foreach ($users as $user_value) {?>
+                                <?php foreach ($articlelist as $article) {?>
                                 <tr>
-                                    <td><?php echo $user_value->name; ?></td>
-                                    <td><?php echo $user_value->email; ?></td>
+                                    <td><?php echo $article->title; ?></td>
+                                    <td><?php echo $article->image; ?></td>
+                                     <td><?php echo $article->excerpt; ?></td>
 
-                                    <td><?php echo $user_value->created_at; ?></td>
-                                    <td><a href="{{ url('edit_user/' . base64_encode($user_value->id)) }}">Edit</a></td>
-
+                                    <td><?php echo $article->created_at; ?></td>
+                                    <td><a href='/Rnd/articleedit/{{ base64_encode($article->id) }}'>Edit</a><a href='/articleedit/{{ base64_encode($article->id) }}'> Delete</a></td>
 
                                 </tr>
                                 <?php }?>
                             </table>
 
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <a href="/addarticle" class="btn btn-primary">
-                                        Add Article
-                                    </a>
-
-
-                                </div>
-                            </div>
+                            
                         </center>
 
 
