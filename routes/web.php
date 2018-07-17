@@ -30,6 +30,8 @@ Route::get('articlelistdisplay','ArticleController@articleListDisplay');
 
 Route::get('/articleedit/{article_id}','ArticleController@articleEdit');
 
+Route::post('updatearticle','ArticleController@UpdateArticle');
+
 
 
  Route::get('/edit_user/{id}', ['uses' => 'UserController@edit']);

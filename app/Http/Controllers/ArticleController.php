@@ -1,20 +1,28 @@
 <?php
 namespace App\Http\Controllers;
 
-use Auth;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redir;
 use App\User;
 use App\Articlelist;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+use Session;
 
 
 class ArticleController extends Controller {
 
     public function articleFormDisplay() {
+
+        if (Auth::check()) {
         return view('user_add_article');
     }
+    else{
+        return view('auth.login');
+    }
+}
 
     public function articleFormProcessing(Request $request) {
 
@@ -25,30 +33,19 @@ class ArticleController extends Controller {
         $user = Auth::user();
         $article->title=request('title');
         $article->content=request('content');
-        $article->image=request()->file('image');
         $article->excerpt=request('excerpt');
         $article->status=request('status');
         $article->user_id=$user->id;
-
-
-
-        /*$image = $request->file('image');
-
-        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-
-        $destinationPath = public_path('resources/articleimage');
-
-        $image->move($destinationPath, $input['imagename']);
-        */
-
-        $imageName = $request->file('image')->getClientOriginalName();
-
+        $imagename = $request->file('image')->getClientOriginalName();
         $request->file('image')->move(
-            base_path() . '/public/articleimage/', $imageName
+            base_path() . '/public/articleimage/', $imagename
         );
+
+        $article->image=$imagename;
         $article->save();
-        echo 'success';
-        //return redirect()->action('ArticleController@articlelist');
+        
+        Session::flash('success', 'The Data has inserted successfully in the Database');
+        return redirect()->action('ArticleController@articleListDisplay');
 
     }
 
@@ -79,6 +76,13 @@ class ArticleController extends Controller {
     }
 
 }
+
+    public function UpdateArticle(){
+
+        App\Articlelist::where('active', 1)
+            ->update(['delayed' => 1]);
+
+    }
 
 
 

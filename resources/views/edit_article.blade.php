@@ -5,17 +5,19 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Add Article</div>
+                <div class="panel-heading">Edit Article</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST"  enctype="multipart/form-data">
+                    
+                        {!! Form::model($article_details,array('method'=>'POST','enctype'=>'multipart/form-data','class'=>'form-horizontal','route'=>'updatearticle')) !!}
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Title</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="title" value="<?php echo $article_details->title;  ?>" required autofocus>
+                                
+                                {!! Form::text('title', null, ['id' => 'title','class' => 'form-control']) !!}
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -29,7 +31,8 @@
                             <label for="email" class="col-md-4 control-label">content</label>
 
                             <div class="col-md-6">
-                                <textarea id="content" class="form-control" name="content" value="<?php echo $article_details->content;  ?>" required ></textarea>
+                                
+                                {!! Form::textarea('content',null,['class'=>'form-control','id'=>'content']) !!}
 
                                 @if ($errors->has('content'))
                                     <span class="help-block">
@@ -41,9 +44,12 @@
 
                         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                             <label for="image" class="col-md-4 control-label">Image</label>
-
                             <div class="col-md-6">
-                                <input id="file" type="file" class="form-control" name="image" required>
+                               <img  src='{{ asset("public/articleimage/$article_details->image")}}' width='100px' height='100px'>
+                            </div>
+                            <div class="col-md-6">
+                                
+                                {!! Form::file('image',null,['class'=>'form-control','id'=>'image']) !!}
 
                                 @if ($errors->has('image'))
                                     <span class="help-block">
@@ -57,7 +63,8 @@
                             <label for="excerpt" class="col-md-4 control-label">Excerpt</label>
 
                             <div class="col-md-6">
-                                <textarea id="excerpt" class="form-control" name="excerpt" required></textarea>
+                                
+                                {!! Form::textarea('excerpt',null,array('id'=>'excerpt','class'=>'form-control')) !!}
 
                             </div>
                         </div>
@@ -66,23 +73,17 @@
 
                             <div class="col-md-6">
 
-                                <select id="status" class="form-control" name="status" required>
-                                    <option value="">Select Status</option>
-                                    <option value="A">Active</option>
-                                    <option value="I">Inactive</option>
-                                </select>
+                                {!! Form::select('status', ['empty'=>'Select Status','A' => 'Active', 'I' => 'Inactive'], null, ['class' => 'form-control']) !!}
 
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Add
-                                </button>
+                                {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>
-                    </form>
+                   {!! Form::close() !!}
                 </div>
             </div>
         </div>

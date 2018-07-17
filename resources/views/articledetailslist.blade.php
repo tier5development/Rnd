@@ -24,7 +24,7 @@
                                      <td><?php echo $article->excerpt; ?></td>
 
                                     <td><?php echo $article->created_at; ?></td>
-                                    <td><a href='/Rnd/articleedit/{{ base64_encode($article->id) }}'>Edit</a><a href='/articleedit/{{ base64_encode($article->id) }}'> Delete</a></td>
+                                    <td><a href='/article/articleedit/{{ base64_encode($article->id) }}'>Edit</a><a href='/articleedit/{{ base64_encode($article->id) }}'> Delete</a></td>
 
                                 </tr>
                                 <?php }?>
