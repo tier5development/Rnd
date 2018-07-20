@@ -5,3 +5,5 @@ add_article V1.0 is stable to release to article_dev
 Modify add article,listing & edit is done
 
 add_article V1.1 is stable to release article_dev
+
+add_article V1.2 is stable to release article_dev
