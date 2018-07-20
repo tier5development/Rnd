@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                    
-                    {!! Form::open(array('class'=>'form-horizontal','route' => 'articleprocess','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+                    {!! Form::open(array('id'=>'myform','class'=>'form-horizontal','route' => 'articleprocess','method'=>'POST','enctype'=>'multipart/form-data')) !!}
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -74,7 +74,7 @@
                             <div class="col-md-6">
 
                                 
-                                {!! Form::select('status', ['empty'=>'Select Status','A' => 'Active', 'I' => 'Inactive'], null, ['class' => 'form-control']) !!}
+                                {!! Form::select('status', ['null'=>'Select Status','A' => 'Active', 'I' => 'Inactive'],['class' => 'form-control']) !!}
 
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 
-                                {!! Form::submit('Add', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Add', ['class' => 'btn btn-primary','id'=>'sub']) !!}
                             </div>
                         </div>
                     {!! Form::close() !!}
@@ -91,13 +91,51 @@
         </div>
     </div>
 </div>
-@endsection
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
 
-<!-- <script type='text/javascript'>
-$(document).ready(function(){
-    $("#title").click(function(){
-        $(this).hide();
-    });
+
+<script>
+$(document).ready(function (){
+    $('#myform').validate({ 
+         rules: {
+             title: {
+                required:true
+            },
+            content:{
+                required:true,
+                minlength:10
+            },
+            image:{
+                required:true,
+            },
+            excerpt:{
+                required:true,
+                minlength:8
+            },
+            status:{
+                required:true
+            }
+        }
 });
-    
-    </script> -->
+});  
+
+/*jQuery.validator.setDefaults({
+  debug: true,
+  success: "valid"
+});
+jQuery( "#myform" ).validate({
+      rules: {
+        "title": {
+          required: true
+        }
+      },
+        submitHandler: function (form) { // for demo
+            alert('valid form submitted'); // for demo
+            return false; // for demo
+        }
+    }); */
+</script> 
+
+@endsection

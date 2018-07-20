@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 
 
+
 class ArticleController extends Controller {
 
-    public function articleFormDisplay() {
+    /*public function articleFormDisplay() {
 
         if (Auth::check()) {
         return view('user_add_article');
@@ -22,37 +23,44 @@ class ArticleController extends Controller {
     else{
         return view('auth.login');
     }
-}
+}*/
+
+    public function articleFormDisplay(){
+
+        return view('user_add_article');
+    }
 
     public function articleFormProcessing(Request $request) {
 
-        //$title = Input::get('title');
         //dd($request->all());
-       
         $article = new Articlelist();
         $user = Auth::user();
-        $article->title=request('title');
-        $article->content=request('content');
-        $article->excerpt=request('excerpt');
-        $article->status=request('status');
+        $article->title=$request->title;
+        $article->content=$request->content;
+        $article->excerpt=$request->excerpt;
+        $article->status=$request->status;
         $article->user_id=$user->id;
         $imagename = $request->file('image')->getClientOriginalName();
+        $imagename=time().$imagename;
         $request->file('image')->move(
             base_path() . '/public/articleimage/', $imagename
         );
-
         $article->image=$imagename;
-        $article->save();
-        
-        Session::flash('success', 'The Data has inserted successfully in the Database');
+        if($article->save()){
+        $request->session()->flash('alert-success', 'Article has been successfully created !');
         return redirect()->action('ArticleController@articleListDisplay');
+    }
+    else{
+        $request->session()->flash('alert-danger', 'Article has not been created !');
+        return redirect()->action('ArticleController@articleListDisplay');
+    }
 
     }
 
     public function articleListDisplay(){
 
        $articlelist = \App\Articlelist::where('status', 'A')
-               ->orderBy('title', 'asc')
+               ->orderBy('id', 'desc')
                ->get();
         //dd($articlelist);
         return view('articledetailslist',compact('articlelist'));
@@ -77,12 +85,48 @@ class ArticleController extends Controller {
 
 }
 
-    public function UpdateArticle(){
+    public function UpdateArticle(Request $request, $id){
 
-        App\Articlelist::where('active', 1)
-            ->update(['delayed' => 1]);
+        $article_details=Articlelist::find($id);
+        $article_details->title=$request->title;
+        $article_details->content=$request->content;
+        $image=$request->file('image');
+        $filename=$image->getClientOriginalName();
+        $filename=time().$filename;
+        $destinationPath = base_path().'/public/articleimage/';
+        $image->move($destinationPath,$filename);
+        $article_details->excerpt=$request->excerpt;
+        $article_details->image=$filename;
+        $article_details->status=$request->status;
+        //$article_details->updated_at=date("Y-m-d h:i:sa");
+        if($article_details->save()){
+        //\Session::flash('flash_message','successfully updated.');
+        $request->session()->flash('alert-success', 'Article has been successfully updated !');
+        return redirect()->action('ArticleController@articleListDisplay');
+    }
+    else{
+
+        $request->session()->flash('alert-danger', 'Article has not been Updated !');
+        return redirect()->action('ArticleController@articleListDisplay');
+    }
 
     }
+
+    public function DeleteArticle(Request $request,$id){
+
+        $id=base64_decode($id);
+        $article_details=\App\Articlelist::find($id);
+        //dd($article_details);
+        if($article_details->delete()){
+        $request->session()->flash('alert-success', 'Article has been successfully deleted !');   
+        return redirect()->action('ArticleController@articleListDisplay');
+    }
+
+    else{
+        $request->session()->flash('alert-danger', 'Article has not been deleted !');   
+        return redirect()->action('ArticleController@articleListDisplay');
+    }
+}
 
 
 

@@ -6,10 +6,11 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Article</div>
-
+                
                 <div class="panel-body">
                     
-                        {!! Form::model($article_details,array('method'=>'POST','enctype'=>'multipart/form-data','class'=>'form-horizontal','route'=>'updatearticle')) !!}
+                        {!! Form::model($article_details,array('enctype'=>'multipart/form-data','class'=>'form-horizontal','route'=>array('updatearticle',$article_details->id),'method'=>'put')) !!}
+
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -50,7 +51,7 @@
                             <div class="col-md-6">
                                 
                                 {!! Form::file('image',null,['class'=>'form-control','id'=>'image']) !!}
-
+                                {!! Form::text('image',null,['class'=>'form-control','id'=>'image']) !!}
                                 @if ($errors->has('image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
@@ -89,4 +90,34 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
+
+
+<script>
+$(document).ready(function (){
+    $('#myform').validate({ 
+         rules: {
+             title: {
+                required:true
+            },
+            content:{
+                required:true,
+                minlength:10
+            },
+            image:{
+                required:true,
+            },
+            excerpt:{
+                required:true,
+                minlength:8
+            },
+            status:{
+                required:true
+            }
+        }
+});
+}); 
+</script> 
 @endsection

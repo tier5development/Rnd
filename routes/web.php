@@ -23,14 +23,21 @@ Route::post('login', 'UserController@loginprocess')->name('userlogging');
 
 Route::get('userlist', 'UserController@userlist');
 
-Route::get('addarticle', 'ArticleController@articleFormDisplay')->name('articlename');
-Route::post('articleprocess', 'ArticleController@articleFormProcessing')->name('articleprocess');
+//Route::get('addarticle', 'ArticleController@articleFormDisplay')->name('articlename');
+//Route::get('articlelistdisplay','ArticleController@articleListDisplay')->middleware('Userauthentication');
+//Route::put('/updatearticle/{article_id}','ArticleController@UpdateArticle')->name('updatearticle');
 
-Route::get('articlelistdisplay','ArticleController@articleListDisplay');
 
-Route::get('/articleedit/{article_id}','ArticleController@articleEdit');
 
-Route::post('updatearticle','ArticleController@UpdateArticle');
+Route::group(['middleware' => 'Userauthentication'], function () {
+    Route::get('articlelistdisplay', 'ArticleController@articleListDisplay');
+    Route::get('addarticle', 'ArticleController@articleFormDisplay')->name('articlename');
+    Route::post('articleprocess', 'ArticleController@articleFormProcessing')->name('articleprocess');
+    Route::get('/articleedit/{article_id}','ArticleController@articleEdit');
+    Route::put('/updatearticle/{article_id}','ArticleController@UpdateArticle')->name('updatearticle');
+    Route::get('articledelete/{article_id}','ArticleController@DeleteArticle')->name('articledelete');
+
+});
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class UserauthenticationMiddleware
@@ -15,6 +16,39 @@ class UserauthenticationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+
+        if (Auth::check()) {
+
+            return $next($request);
+        }
+        else{
+            return response(view('auth.login'));
+            
+        }
+       
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
