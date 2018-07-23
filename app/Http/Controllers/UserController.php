@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use DB;
+//use Auth;
+//use DB;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redir;
+use luminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+use Session;
 
 class UserController extends Controller {
 
@@ -51,21 +54,21 @@ class UserController extends Controller {
 
     /******************start user login process*****************/
 
-    public function loginprocess() {
+    public function loginprocess(Request $request) {
 
-        $userdata = array(
-            'email'    => Input::get('email'),
-            'password' => Input::get('password'),
-        );
-
-        if (Auth::attempt($userdata)) {
-
-            echo 'SUCCESS!';
+        //dd($request);
+        $email=$request->email;
+        $password=$request->password;
+        if (Auth::attempt(['email' => $email, 'password' => $password])){
+            $request->session()->flash('login_success','You have successfully logggedin');
+            return redirect()->action('ArticleController@articleListDisplay');
 
         } else {
 
              //return Redirect::to('login');
+            $request->session()->flash('login_failed','Invalid credentials');
             return redirect()->action('UserController@login');
+           
 
         }
 

@@ -7,3 +7,7 @@ Modify add article,listing & edit is done
 add_article V1.1 is stable to release article_dev
 
 add_article V1.2 is stable to release article_dev
+
+modified login
+
+login V1.0 is stable released to article_dev

@@ -8,14 +8,16 @@
                 <div class="panel-heading">Login</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('userlogging') }}">
+                    
+                        {!! Form::open(array('class'=>'form-horizontal','route' => 'userlogging','method'=>'POST','enctype'=>'multipart/form-data')) !!}
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <!--<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>-->
+                                {!! Form::text('email',null,['id'=>'email','class'=>'form-control']) !!}
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -29,7 +31,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -66,4 +68,24 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('form').validate({
+        rules:{
+           email:{
+             required:true,
+             email:true
+           },
+           password:{
+            required:true
+            
+           } 
+        }
+
+    });
+
+});
+</script>
 @endsection
