@@ -11,3 +11,7 @@ add_article V1.2 is stable to release article_dev
 modified login
 
 login V1.0 is stable released to article_dev
+
+registration is modified
+
+registration V1.1 is stable released to article_dev

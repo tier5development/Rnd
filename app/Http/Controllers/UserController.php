@@ -14,15 +14,11 @@ use Session;
 
 class UserController extends Controller {
 
-    public function index() {
-        //
-    }
+    
     /*******************user registration form display start************************/
     public function create() {
 
-        //return view('registration');
         return view('auth.register');
-
     }
     /*******************user registration form display end************************/
 
@@ -30,7 +26,7 @@ class UserController extends Controller {
 
     public function store(Request $request) {
 
-        $this->validate(request(), [
+        /*$this->validate(request(), [
             'name'     => 'required',
             'email'    => 'required|email',
             'password' => 'required',
@@ -39,7 +35,21 @@ class UserController extends Controller {
         $user = User::create(request(['name', 'email', 'password']));
 
         auth()->login($user);
-        return redirect()->action('UserController@userlist');
+        return redirect()->action('UserController@userlist'); */
+        //dd($request);
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=$request->password;
+        if($user->save()){
+            $request->session()->flash('reg_success','Your registration is successfull');
+            return redirect()->action('UserController@login');
+        }
+        else{
+            $request->session()->flash('reg_fail','Your registration is failed');
+            return redirect()->action('UserController@create');
+        }
+
 
     }
     /*******************user registration process end************************/

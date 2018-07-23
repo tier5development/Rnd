@@ -8,14 +8,17 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    
+                        {!! Form::open(array('class'=>'form-horizontal','method'=>'POST','route'=>'register')) !!}
+                        
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                
+                                {!! Form::text('name',null,['id'=>'name','class'=>'form-control'])!!}
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -29,7 +32,8 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                
+                                {!! Form::text('email',null,['id'=>'email','class'=>'form-control']) !!}
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -63,9 +67,9 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
+                                
+                                {!! Form::submit('Register',['id'=>'registration','class'=>'btn btn-primary']) !!}
+
                             </div>
                         </div>
                     </form>
@@ -74,4 +78,29 @@
         </div>
     </div>
 </div>
+
+
 @endsection
+
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('form').validate({
+        rules:{
+            name:{
+                required:true,
+            },
+           email:{
+             required:true,
+             email:true
+           },
+           password:{
+            required:true
+           } 
+        }
+
+    });
+
+});
+</script>
