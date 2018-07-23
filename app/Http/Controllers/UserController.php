@@ -12,6 +12,7 @@ use luminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
+
 class UserController extends Controller {
 
     
@@ -42,6 +43,7 @@ class UserController extends Controller {
         $user->email=$request->email;
         $user->password=$request->password;
         if($user->save()){
+            
             $request->session()->flash('reg_success','Your registration is successfull');
             return redirect()->action('UserController@login');
         }
@@ -70,13 +72,13 @@ class UserController extends Controller {
         $email=$request->email;
         $password=$request->password;
         if (Auth::attempt(['email' => $email, 'password' => $password])){
-            $request->session()->flash('login_success','You have successfully logggedin');
+            $request->session()->flash('alert-success','You have successfully logggedin');
             return redirect()->action('ArticleController@articleListDisplay');
 
         } else {
 
              //return Redirect::to('login');
-            $request->session()->flash('login_failed','Invalid credentials');
+            $request->session()->flash('alert-failed','Invalid credentials');
             return redirect()->action('UserController@login');
            
 

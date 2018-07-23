@@ -15,3 +15,5 @@ login V1.0 is stable released to article_dev
 registration is modified
 
 registration V1.1 is stable released to article_dev
+
+login V1.1 is stable released to article_dev
