@@ -56,7 +56,7 @@ class UserController extends Controller {
 
     public function loginprocess(Request $request) {
 
-        //dd($request);
+        
         $email=$request->email;
         $password=$request->password;
         if (Auth::attempt(['email' => $email, 'password' => $password])){
@@ -65,8 +65,7 @@ class UserController extends Controller {
 
         } else {
 
-             //return Redirect::to('login');
-            $request->session()->flash('alert-failed','Invalid credentials');
+            $request->session()->flash('alert-danger','Invalid credentials');
             return redirect()->action('UserController@login');
            
 

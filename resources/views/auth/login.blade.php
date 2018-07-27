@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
+
+      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      @endif
+    @endforeach
+  </div> 
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -16,7 +24,6 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <!--<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>-->
                                 {!! Form::text('email',null,['id'=>'email','class'=>'form-control']) !!}
 
                                 @if ($errors->has('email'))
@@ -31,7 +38,8 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
+                                
+                                {!! Form::password('password',['id'=>'password','class'=>'form-control']) !!}
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
