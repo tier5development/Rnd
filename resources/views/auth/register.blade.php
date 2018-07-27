@@ -18,11 +18,41 @@
 
                             <div class="col-md-6">
                                 
-                                {!! Form::text('name',null,['id'=>'name','class'=>'form-control'])!!}
-
+                            {!! Form::text('name',null,['id'=>'name','class'=>'form-control'])!!}
+                            
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            <label for="gender" class="col-md-4 control-label">Gender</label>
+
+                            <div class="col-md-6">
+                                
+                                {!! Form::radio('gender','M') !!} M
+                                {!! Form::radio('gender','F') !!} F
+
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="address" class="col-md-4 control-label">Address</label>
+
+                            <div class="col-md-6">
+                                
+                                {!! Form::textarea('address',null,['id'=>'address','class'=>'form-control'])!!}
+
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -47,7 +77,8 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                {!! Form::password('password',null,['id'=>'password','class'=>'form-control']) !!}
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -89,6 +120,12 @@ $(document).ready(function(){
     $('form').validate({
         rules:{
             name:{
+                required:true,
+            },
+            gender:{
+                required:true,
+            },
+            address:{
                 required:true,
             },
            email:{

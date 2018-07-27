@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-//use Auth;
-//use DB;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -27,31 +25,21 @@ class UserController extends Controller {
 
     public function store(Request $request) {
 
-        /*$this->validate(request(), [
-            'name'     => 'required',
-            'email'    => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = User::create(request(['name', 'email', 'password']));
-
-        auth()->login($user);
-        return redirect()->action('UserController@userlist'); */
-        //dd($request);
         $user=new User();
         $user->name=$request->name;
         $user->email=$request->email;
         $user->password=$request->password;
+        $user->address=$request->address;
+        $user->gender=$request->gender;
         if($user->save()){
             
-            $request->session()->flash('reg_success','Your registration is successfull');
+            $request->session()->flash('alert-success','Your registration is successfull');
             return redirect()->action('UserController@login');
         }
         else{
-            $request->session()->flash('reg_fail','Your registration is failed');
+            $request->session()->flash('alert-fail','Your registration is failed');
             return redirect()->action('UserController@create');
         }
-
 
     }
     /*******************user registration process end************************/
