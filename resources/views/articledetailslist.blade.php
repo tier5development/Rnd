@@ -26,6 +26,9 @@
                                      <th>Created</th>
                                     <th>Action</th>
                                 </tr>
+                                @if(!empty($articlelist)) 
+                                <tr>{{ 'No Record Found' }}</tr>
+                                @endif
                                 @foreach ($articlelist as $article)
                                 <tr>
                                     <td>{{ $article->title }}</td>
@@ -33,7 +36,12 @@
                                      <td>{{$article->excerpt}}</td>
 
                                     <td>{{$article->created_at}}</td>
-                                    <td><a href='/article/articleedit/{{ base64_encode($article->id) }}'>Edit</a><a href='/article/articledelete/{{ base64_encode($article->id) }}'> Delete</a></td>
+                                    <td>
+                                        <!--<a href='/article/articleedit/{{ base64_encode($article->id) }}'>Edit</a> -->
+                                    <a href="{{ url('articleedit/' . base64_encode($article->id)) }}">Edit</a>
+
+                                       <!-- <a href='/article/articledelete/{{ base64_encode($article->id) }}'> Delete</a></td>-->
+                                        <a href="{{ url('articledelete/'.base64_encode($article->id)) }}">Delete</a>
 
                                 </tr>
                                 @endforeach

@@ -13,23 +13,23 @@
 
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Title</label>
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Title</label>
 
                             <div class="col-md-6">
                                 
                                 {!! Form::text('title', null, ['id' => 'title','class' => 'form-control']) !!}
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('title'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">content</label>
+                        <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+                            <label for="content" class="col-md-4 control-label">content</label>
 
                             <div class="col-md-6">
                                 
@@ -42,21 +42,29 @@
                                 @endif
                             </div>
                         </div>
-
+                            
                         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                             <label for="image" class="col-md-4 control-label">Image</label>
                             <div class="col-md-6">
+
+                                
+
                                <img  src='{{ asset("public/articleimage/$article_details->image")}}' width='100px' height='100px'>
                             </div>
+                            <label for="image" class="col-md-4 control-label"></label>
                             <div class="col-md-6">
                                 
                                 {!! Form::file('image',null,['class'=>'form-control','id'=>'image']) !!}
-                                {!! Form::text('image',null,['class'=>'form-control','id'=>'image']) !!}
+                                
                                 @if ($errors->has('image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
+                                
+                                 <input type='hidden' name='hidden_image' value='<?php echo $article_details->image; ?>'> 
+
+
                             </div>
                         </div>
 
@@ -70,7 +78,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="excerpt" class="col-md-4 control-label">Status</label>
+                            <label for="status" class="col-md-4 control-label">Status</label>
 
                             <div class="col-md-6">
 
@@ -82,6 +90,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+                                <a href='{!! url("/articlelistdisplay"); !!}' class = 'btn btn-primary'>Cancel</a>
                             </div>
                         </div>
                    {!! Form::close() !!}

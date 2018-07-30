@@ -15,24 +15,20 @@ use Session;
 
 class ArticleController extends Controller {
 
-    /*public function articleFormDisplay() {
-
-        if (Auth::check()) {
-        return view('user_add_article');
-    }
-    else{
-        return view('auth.login');
-    }
-}*/
+    
+    /**************article form display start*************/
 
     public function articleFormDisplay(){
 
         return view('user_add_article');
     }
 
+    /**************article form display end***************/
+
+     /**************article form processing start*********/
+
     public function articleFormProcessing(Request $request) {
 
-        //dd($request->all());
         $article = new Articlelist();
         $user = Auth::user();
         $article->title=$request->title;
@@ -56,6 +52,9 @@ class ArticleController extends Controller {
     }
 
     }
+    /**************article form processing end*********/
+
+    /**************article form listing start*********/
 
     public function articleListDisplay(){
 
@@ -66,6 +65,10 @@ class ArticleController extends Controller {
         return view('articledetailslist',compact('articlelist'));
 
     }
+    /**************article form listing end*********/
+
+    /**************article form edit display start***/
+
 
     public function articleEdit($id=null){
 
@@ -80,27 +83,35 @@ class ArticleController extends Controller {
         $article_id=base64_decode($id);
         $article_details=\App\Articlelist::where('id',$article_id)->first();
         return view('edit_article',compact('article_details'));
-        
     }
-
 }
+
+    /**************article form edit display end****/
+
+    /**************article form update start***/
 
     public function UpdateArticle(Request $request, $id){
 
         $article_details=Articlelist::find($id);
         $article_details->title=$request->title;
         $article_details->content=$request->content;
+        $article_details->excerpt=$request->excerpt;
+        $article_details->status=$request->status;
         $image=$request->file('image');
+        if(!empty($image)){
         $filename=$image->getClientOriginalName();
         $filename=time().$filename;
         $destinationPath = base_path().'/public/articleimage/';
         $image->move($destinationPath,$filename);
-        $article_details->excerpt=$request->excerpt;
+        $old_image=base_path().'/public/articleimage/'.$request->hidden_image;
+        unlink($old_image);
         $article_details->image=$filename;
-        $article_details->status=$request->status;
-        //$article_details->updated_at=date("Y-m-d h:i:sa");
+        }
+        else{
+            $article_details->image=$request->hidden_image;
+        }
+        
         if($article_details->save()){
-        //\Session::flash('flash_message','successfully updated.');
         $request->session()->flash('alert-success', 'Article has been successfully updated !');
         return redirect()->action('ArticleController@articleListDisplay');
     }
@@ -111,6 +122,9 @@ class ArticleController extends Controller {
     }
 
     }
+    /**************article form update end********/
+
+    /**************article form delete start**************/
 
     public function DeleteArticle(Request $request,$id){
 
@@ -127,6 +141,10 @@ class ArticleController extends Controller {
         return redirect()->action('ArticleController@articleListDisplay');
     }
 }
+
+    /**************article form delete end**************/
+
+    
 
 
 

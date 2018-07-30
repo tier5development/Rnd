@@ -12,24 +12,24 @@
                     {!! Form::open(array('id'=>'myform','class'=>'form-horizontal','route' => 'articleprocess','method'=>'POST','enctype'=>'multipart/form-data')) !!}
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Title</label>
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Title</label>
 
                             <div class="col-md-6">
                                 
 
                                 {!! Form::text('title', null, ['id' => 'title','class' => 'form-control']) !!}
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('title'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">content</label>
+                        <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
+                            <label for="content" class="col-md-4 control-label">content</label>
 
                             <div class="col-md-6">
                                 
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="excerpt" class="col-md-4 control-label">Status</label>
+                            <label for="status" class="col-md-4 control-label">Status</label>
 
                             <div class="col-md-6">
 
@@ -83,6 +83,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 
                                 {!! Form::submit('Add', ['class' => 'btn btn-primary','id'=>'sub']) !!}
+                                <a href='{!! url("/articlelistdisplay"); !!}' class = 'btn btn-primary'>Cancel</a>
                             </div>
                         </div>
                     {!! Form::close() !!}
@@ -91,6 +92,7 @@
         </div>
     </div>
 </div>
+@endsection
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
@@ -121,21 +123,7 @@ $(document).ready(function (){
 });
 });  
 
-/*jQuery.validator.setDefaults({
-  debug: true,
-  success: "valid"
-});
-jQuery( "#myform" ).validate({
-      rules: {
-        "title": {
-          required: true
-        }
-      },
-        submitHandler: function (form) { // for demo
-            alert('valid form submitted'); // for demo
-            return false; // for demo
-        }
-    }); */
+
 </script> 
 
-@endsection
+
