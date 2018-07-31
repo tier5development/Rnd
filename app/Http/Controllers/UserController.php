@@ -74,49 +74,16 @@ class UserController extends Controller {
     }
     /******************end user login process*******************/
 
-    /***********************user dashboard listing start**********************/
 
-    public function userlist() {
-        $users = DB::table('users')->get();
+    /******************start user logout process start*****************/
 
-        return view('user_dashboard', ['users' => $users]);
+   public function LogoutArticle(){
 
-    }
-/***********************user dashboard listing end**********************/
+    Auth::logout();
+    return redirect()->action('UserController@login');
 
-    public function edit($id) {
+}
 
-        if ($id == null) {
-            return redirect()->action('UserController@userlist');
-        } else {
-
-            $id   = base64_decode($id);
-            $user = DB::table('users')->where('id', $id)->first();
-            return view('edit_user', compact('user'));
-
-        }
-
-    }
-
-    /*public function update() {
-    /* dd(Input::get());die;
-    $name  = Input::get('name');
-    $email = Input::get('email');
-    DB::table('users')
-    ->where('imei_number', $arg1)
-    ->update(['name' => $name, 'email' => $email]);
-    return redirect('datamanager');
-
-    }*/
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id) {
-        //
-    }
+    /******************start user logout process end*****************/
 
 }

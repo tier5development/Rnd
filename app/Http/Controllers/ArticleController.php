@@ -112,14 +112,14 @@ class ArticleController extends Controller {
         }
         
         if($article_details->save()){
-        $request->session()->flash('alert-success', 'Article has been successfully updated !');
-        return redirect()->action('ArticleController@articleListDisplay');
-    }
-    else{
+            $request->session()->flash('alert-success', 'Article has been successfully updated !');
+            return redirect()->action('ArticleController@articleListDisplay');
+        }
+        else{
 
-        $request->session()->flash('alert-danger', 'Article has not been Updated !');
-        return redirect()->action('ArticleController@articleListDisplay');
-    }
+            $request->session()->flash('alert-danger', 'Article has not been Updated !');
+            return redirect()->action('ArticleController@articleListDisplay');
+        }
 
     }
     /**************article form update end********/
@@ -132,38 +132,21 @@ class ArticleController extends Controller {
         $article_details=\App\Articlelist::find($id);
         //dd($article_details);
         if($article_details->delete()){
-        $request->session()->flash('alert-success', 'Article has been successfully deleted !');   
-        return redirect()->action('ArticleController@articleListDisplay');
+            $request->session()->flash('alert-success', 'Article has been successfully deleted !');   
+            return redirect()->action('ArticleController@articleListDisplay');
+        }
+
+        else{
+            $request->session()->flash('alert-danger', 'Article has not been deleted !');   
+            return redirect()->action('ArticleController@articleListDisplay');
+        }
     }
 
-    else{
-        $request->session()->flash('alert-danger', 'Article has not been deleted !');   
-        return redirect()->action('ArticleController@articleListDisplay');
+    public function LogoutArticle(){
+
+        Auth::logout();
+
+        return redirect()->action('UserController@login');
+
     }
-}
-
-    /**************article form delete end**************/
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

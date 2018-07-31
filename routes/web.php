@@ -36,6 +36,7 @@ Route::group(['middleware' => 'Userauthentication'], function () {
     Route::get('/articleedit/{article_id}','ArticleController@articleEdit');
     Route::put('/updatearticle/{article_id}','ArticleController@UpdateArticle')->name('updatearticle');
     Route::get('articledelete/{article_id}','ArticleController@DeleteArticle')->name('articledelete');
+    Route::any('logoutarticle','UserController@LogoutArticle');
 
 });
 
