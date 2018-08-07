@@ -16,3 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*
+Route::group(array('prefix' => 'api-V1'), function() {
+    Route::resource('restful-apis','UserappController');
+});
+*/
+
+Route::post('V1/registration','UserappController@registrationProcess');
+
+
+        
+    

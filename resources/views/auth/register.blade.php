@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
+
+      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      @endif
+    @endforeach
+  </div> <!-- end .flash-message -->
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -88,19 +96,25 @@
                             </div>
                         </div>
 
-                        <!----<div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        <div class="form-group{{ $errors->has('confirm_password') ? ' has-error' : '' }}"">
+                            <label for="confirm_password" class="col-md-4 control-label">Confirm Password</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                               
+                                {!! Form::password('confirm_password',null,['id'=>'confirm_password','class'=>'form-control']) !!}
+
+                                @if ($errors->has('confirm_password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('confirm_password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                        </div>------>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 
                                 {!! Form::submit('Register',['id'=>'registration','class'=>'btn btn-primary']) !!}
-
                             </div>
                         </div>
                     </form>
@@ -115,29 +129,44 @@
 
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script>
+{{-- <script>
 $(document).ready(function(){
     $('form').validate({
         rules:{
             name:{
-                required:true,
+                required:true
             },
             gender:{
-                required:true,
+                required:true
             },
             address:{
-                required:true,
+                required:true
             },
            email:{
              required:true,
-             email:true
+             email:true,
+             unique: true
            },
-           password:{
-            required:true
-           } 
+           password :{
+             required:true
+                }
+            
         }
 
     });
 
+      /*$('#email').focusout(function(){
+      var email=$('#email').val();
+      $.ajax({
+
+        url:'UserController@emailValidation',
+        data:{email:'email'},
+        success: function(response){
+            $().
+        }
+      }); 
+    }); */
+    
+
 });
-</script>
+</script> --}}

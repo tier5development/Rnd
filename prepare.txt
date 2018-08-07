@@ -32,3 +32,5 @@ article V1.3 is stable released to article_dev
 
 login is modified
 login V1.3 is stable released to article_dev
+
+create registration using REST API

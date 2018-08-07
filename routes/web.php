@@ -16,7 +16,14 @@ return view('welcome');
 });
  */
 Route::get('registration', 'UserController@create');
+
+Route::get('dashboard',[
+        'uses' => 'DashboardController@index',
+        'as' => 'dashboard'
+    ]);
 Route::post('/registration', 'UserController@store')->name('register');
+Route::post('/verify/{sign_up_string},/{user_id}', 'UserController@verify');
+
 
 Route::get('login', 'UserController@login');
 Route::post('login', 'UserController@loginprocess')->name('userlogging');
@@ -29,7 +36,10 @@ Route::get('userlist', 'UserController@userlist');
 
 
 
-Route::group(['middleware' => 'Userauthentication'], function () {
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function () {
+
     Route::get('articlelistdisplay', 'ArticleController@articleListDisplay');
     Route::get('addarticle', 'ArticleController@articleFormDisplay')->name('articlename');
     Route::post('articleprocess', 'ArticleController@articleFormProcessing')->name('articleprocess');
@@ -50,3 +60,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::resource('/articlelist', 'userController');
 
+/*
+Route::get('sample-restful-apis', function()
+{
+    return array(
+      1 => "expertphp",
+      2 => "demo"
+    );
+});
+
+Route::group(array('prefix' => 'api-V1'), function() {
+    Route::resource('restful-apis','UserappController');
+});
+*/
