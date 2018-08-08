@@ -56,10 +56,10 @@
                                     </li>
                                 
                             </li>
+
                             {{-- @else 
                             <li><a href="{{ route('userlogging') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li> --}}
-                        @endif
                         
                     </ul>
                 </div>

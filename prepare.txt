@@ -35,6 +35,8 @@ login V1.3 is stable released to article_dev
 
 create registration using REST API
 
+create login using REST API
+
 
 
 Registration V1.4 stable released to article_dev

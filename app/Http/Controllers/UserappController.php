@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use luminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UserappController extends Controller
@@ -69,4 +70,44 @@ class UserappController extends Controller
 	/***********************User registration end********************/
 
 	/***********************User Login ******************************/
+
+	public function loginProcess(Request $request){
+
+		$email=$request->email;
+		$password=$request->password;
+
+		$validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:4'
+        ]);
+		try{
+        if($validator->fails()){
+        	return response()->json([
+        		'success'=>false,
+        		'message'=>$validator->errors()
+        	],400);
+        }
+         if (Auth::attempt(['email' => $email, 'password' => $password])){
+         	return response()->json([
+         		'success'=>true,
+         		'message'=>'Your login has been successfully done'
+         	],200);
+         }
+
+         else{
+         	return response()->json([
+         		'success'=>false,
+         		'message'=>'Please check your authentication'
+         	],400);
+         }
+	}
+	catch(Exception $e){
+		return response()->json([
+			'success'=>false,
+			'message'=>$e->getMessage()
+
+		],500);
+	}
+	}
+	/***********************User Login end******************************/
 }

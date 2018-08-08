@@ -141,6 +141,35 @@ class ArticleController extends Controller {
             return redirect()->action('ArticleController@articleListDisplay');
         }
     }
+<<<<<<< HEAD
+=======
+}
+
+public function LogoutArticle(){
+
+    Auth::logout();
+
+    return redirect()->action('UserController@login');
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> login
 
     public function LogoutArticle(){
 

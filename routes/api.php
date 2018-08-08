@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('V1/registration','UserappController@registrationProcess');
 
+Route::post('V1/login','UserappController@loginProcess');
+
 
         
     
