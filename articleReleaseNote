@@ -2,3 +2,6 @@ Login V1.0 stable released to article_dev
 	Implemented script for login
 	Implemented UI for login screen
 	Added bootstrap for UI
+
+Configuration V1.0 stable released to dev
+	Changed document root to public and remove index.php from url
