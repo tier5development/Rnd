@@ -49,10 +49,7 @@ class UserController extends Controller {
               'confirm_password.same'=>'check your confirm password'
             ]);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> login
         $user=new User();
         $user->sign_up_ip=\Request::ip();
         $sign_up_string=str_random(10);
@@ -63,7 +60,7 @@ class UserController extends Controller {
         $user->password=$request->password;
         $user->address=$request->address;
         $user->gender=$request->gender;
-<<<<<<< HEAD
+
         $existing_email=\App\User::where('email',$email)
                         ->first();
         if (!empty($existing_email)){
@@ -88,19 +85,10 @@ class UserController extends Controller {
         else{
             $request->session()->flash('alert-fail','Your registration is failed');
             return redirect()->route('registration');
-=======
-        if($user->save()){
-            
-            $request->session()->flash('alert-success','Your registration is successfull');
-            return redirect()->action('UserController@login');
-        }
-        else{
-            $request->session()->flash('alert-fail','Your registration is failed');
-            return redirect()->action('UserController@create');
->>>>>>> login
-        }
+
     }
     }
+}
     /*******************user registration verification process start*********/
 
     public function verify($sign_up_string,$userid){
@@ -117,12 +105,10 @@ class UserController extends Controller {
             }
     }
 
-<<<<<<< HEAD
     /*******************user registration verification process end***********/
 
-=======
-    }
->>>>>>> login
+
+
     /*******************user registration process end************************/
 
     /*******************user login start************************/
