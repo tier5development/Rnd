@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Articlelist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redir;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller {
 
     
-    /*******************user registration form display start************************/
+    /*******************user registration form display start**********************/
     public function create() {
 
         return view('auth.register');
@@ -27,29 +28,34 @@ class UserController extends Controller {
     /*******************user registration process start************************/
 
     public function store(Request $request) {
-            //$validator = Validator::make($request->all(),[
-            $request->validate([
-                'name' => 'required',
+        
+            $validator=Validator::make($request->all(),[
+                'name'=>'required',
                 'gender'=>'required',
                 'address'=>'required',
                 'email'=>'required|unique:users,email',
                 'password'=>'required|min:4',
                 'confirm_password'=>'required|min:4|same:password'
-              ],
-              [
-              'name.required'=>'Enter your name',
-              'gender.required'=>'Select your gender',
-              'address.required'=>'Enter your address',
-              'email.required'=>'Enter your email',
-              'email.unique'=>'User is already exists',
-              'password.required'=>'password is required',
-              'password.min'=>'password should be 4 character long',
-              'confirm_password.required'=>'Enter your confirm password',
-              'confirm_password.min'=>'confirm password should be 4 character long',
-              'confirm_password.same'=>'check your confirm password'
+            ],
+            [
+                'name.required'=>'name is required',
+                'gender.required'=>'gender is requird',
+                'address.required'=>'address is required',
+                'email.required'=>'email is required',
+                'email.unique'=>'User already exist',
+                'password.required'=>'password is required',
+                'password.min'=>'password must be 4 character long',
+                'confirm_password.required'=>'confirm password is required',
+                'confirm_password.min'=>'confirm password must be 4 character long',
+            'confirm_password.same'=>'password & confirm password does not match'
             ]);
 
-
+        if($validator->fails()){
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        else{
         $user=new User();
         $user->sign_up_ip=\Request::ip();
         $sign_up_string=str_random(10);
@@ -61,14 +67,6 @@ class UserController extends Controller {
         $user->address=$request->address;
         $user->gender=$request->gender;
 
-        $existing_email=\App\User::where('email',$email)
-                        ->first();
-        if (!empty($existing_email)){
-            $request->session()->flash('alert-danger','User is already exists');
-            return redirect()->route('registration');
-        }
-        else{
-        
         if($user->save()){
             $data = array(
                 'name' =>$request->name,
@@ -85,8 +83,8 @@ class UserController extends Controller {
         else{
             $request->session()->flash('alert-fail','Your registration is failed');
             return redirect()->route('registration');
-
     }
+
     }
 }
     /*******************user registration verification process start*********/
@@ -123,7 +121,24 @@ class UserController extends Controller {
 
     public function loginprocess(Request $request) {
 
-        
+        $validator=Validator::make($request->all(),[
+
+            'email'=>'required|email',
+            'password'=>'required|min:4'
+        ],[
+            'email.required'=>'Email is required',
+            'email.email'=>'Enter valid email address',
+            'password.required'=>'Password is required',
+            'password.min'=>'password atleast 4 character'
+
+        ]);
+        if($validator->fails()){
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+
+        }
+        else{
         $email=$request->email;
         $password=$request->password;
         if (Auth::attempt(['email' => $email, 'password' => $password])){
@@ -133,10 +148,12 @@ class UserController extends Controller {
         } else {
 
             $request->session()->flash('alert-danger','Invalid credentials');
-            return redirect()->action('UserController@login');
+            //return redirect()->action('UserController@login');
+            return redirect()->route('login');
            
 
         }
+    }
 
     }
     /******************end user login process*******************/
@@ -145,12 +162,26 @@ class UserController extends Controller {
     /******************start user logout process start*****************/
 
    public function LogoutArticle(){
-
     Auth::logout();
-    return redirect()->action('UserController@login');
-
+    return redirect()->route('login');
 }
-
     /******************start user logout process end*****************/
+
+    /*******************User listing start***************************/
+    public function userList(){
+        $userlist=User::all();
+        return view('user_list',compact('userlist'));
+    }
+    /*******************User listing end*****************************/
+
+    /*******************Article listing for individual user start****/
+    public function userarticleList(){
+        $user_id=Auth::user()->id;
+        $articledetailslist=User::find($user_id)->articlelists;
+        //dd($articledetailslist);
+        return view('user_article_details_list',compact('articledetailslist'));
+    }
+    /*******************Article listing for individual user start****/
+
 
 }

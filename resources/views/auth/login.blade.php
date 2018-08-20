@@ -17,7 +17,7 @@
 
                 <div class="panel-body">
                     
-                        {!! Form::open(array('class'=>'form-horizontal','route' => 'userlogging','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+                        {!! Form::open(array('class'=>'form-horizontal','method'=>'POST','enctype'=>'multipart/form-data','route'=>'userlogging')) !!}
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

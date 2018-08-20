@@ -44,9 +44,9 @@ class ArticleApiController extends Controller
                     $request->file('image')
                     ->move(base_path().'/public/articleimage/',$image);
                     $article->image=$image;
-                    $user=Auth::user()->id;
-                    $article->user_id=$user;
-                    //$article->user_id=10;
+                    //$user=Auth::user()->id;
+                    //$article->user_id=$user;
+                    $article->user_id=44;
                     if($article->save()){
                     return response()->json([
                         'success'=>true,
@@ -76,7 +76,7 @@ class ArticleApiController extends Controller
     public function articleListing(){
         try{
         $article_details=Articlelist::where('status','A')
-                         ->where('user_id',40)->paginate(10);
+                         ->where('user_id',44)->paginate(10);
         //dd($article_details);
         if(isset($article_details->items) && (!empty($article_details->items))){
             return response()->json([
@@ -174,7 +174,9 @@ public function deleteArticle(Request $request){
     try{
     $article_details=Articlelist::where('id',$article_id)->first();
     if(isset($article_details) && !empty($article_details)){
+        //dd(base_path().'/public/articleimage/'.$article_details->image);
         $article_details->delete();
+        unlink(base_path().'/public/articleimage/'.$article_details->image);
         return response()->json(['success'=>true,'message'=>'record deleted successfully'],200);
     }
     else{

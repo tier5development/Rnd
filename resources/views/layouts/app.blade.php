@@ -49,11 +49,24 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
-                                
+                            </li>
+                                    <li>
+                                        <a href="{{ url('userlist') }}">Userlist</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('articlelistdisplay') }}">Articlelist</a>
+                                    </li>
                                     <li>
                                         <a href="{{ url('logoutarticle') }}">Logout</a>
                                     </li>
+                                    
+                                    @else
+                                    <li>
+                                    <a href="{{ url('registration') }}">Registration</a>
+                                    </li>
+                                    <li>
+                                    <a href="{{ url('login') }}">Login</a>
+                                </li>
                                 
                             </li>
                             @endif

@@ -17,7 +17,7 @@
 
                 <div class="panel-body">
                     
-                        {!! Form::open(array('class'=>'form-horizontal','method'=>'POST','route'=>'register')) !!}
+                        {!! Form::open(array('class'=>'form-horizontal','method'=>'POST','action'=>'UserController@store')) !!}
                         
                         {{ csrf_field() }}
 
@@ -26,7 +26,7 @@
 
                             <div class="col-md-6">
                                 
-                            {!! Form::text('name',null,['id'=>'name','class'=>'form-control'])!!}
+                            {!! Form::text('name',null,['placeholder'=>'Name','id'=>'name','class'=>'form-control'])!!}
                             
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -56,7 +56,7 @@
 
                             <div class="col-md-6">
                                 
-                                {!! Form::textarea('address',null,['id'=>'address','class'=>'form-control'])!!}
+                                {!! Form::textarea('address',null,['id'=>'address','class'=>'form-control','placeholder'=>'Address'])!!}
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -71,7 +71,7 @@
 
                             <div class="col-md-6">
                                 
-                                {!! Form::text('email',null,['id'=>'email','class'=>'form-control']) !!}
+                                {!! Form::text('email',null,['placeholder'=>'Email','id'=>'email','class'=>'form-control']) !!}
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -86,9 +86,8 @@
 
                             <div class="col-md-6">
 
-                                {!! Form::password('password',null,['id'=>'password','class'=>'form-control']) !!}
-
-                                @if ($errors->has('password'))
+                                {!! Form::password('password', array('placeholder'=>'Password','id'=>'password', 'class'=>'form-control' ) ) !!}
+                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
@@ -101,7 +100,7 @@
 
                             <div class="col-md-6">
                                
-                                {!! Form::password('confirm_password',null,['id'=>'confirm_password','class'=>'form-control']) !!}
+                                {!! Form::password('confirm_password',['id'=>'confirm_password','class'=>'form-control','placeholder'=>'confirm Password']) !!}
 
                                 @if ($errors->has('confirm_password'))
                                     <span class="help-block">
@@ -110,63 +109,53 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 
                                 {!! Form::submit('Register',['id'=>'registration','class'=>'btn btn-primary']) !!}
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 @endsection
 
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-{{-- <script>
-$(document).ready(function(){
+<script>
+ $(document).ready(function(){
     $('form').validate({
-        rules:{
+         rules:{
             name:{
                 required:true
-            },
+             },
             gender:{
                 required:true
-            },
+             },
             address:{
-                required:true
+                 required:true
             },
            email:{
              required:true,
-             email:true,
-             unique: true
-           },
-           password :{
-             required:true
-                }
-            
-        }
+              email:true
+            },
+            password :{
+              required:true,
+             min:4
+         },
+         confirm_password:{
+            required:true,
+            min:4,
+            equalTo:'#password'
+         }
+        
+         }
 
-    });
+     });
+ });
+</script> 
 
-      /*$('#email').focusout(function(){
-      var email=$('#email').val();
-      $.ajax({
-
-        url:'UserController@emailValidation',
-        data:{email:'email'},
-        success: function(response){
-            $().
-        }
-      }); 
-    }); */
-    
-
-});
-</script> --}}

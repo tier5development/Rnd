@@ -16,17 +16,12 @@ Route::get('/', function () {
 });
  
 Route::get('registration', 'UserController@create');
-
-Route::get('dashboard',[
-        'uses' => 'DashboardController@index',
-        'as' => 'dashboard'
-    ]);
 Route::post('/registration', 'UserController@store')->name('register');
-Route::post('/verify/{sign_up_string},/{user_id}', 'UserController@verify');
+//Route::post('/verify/{sign_up_string},/{user_id}', 'UserController@verify');
 
 
-Route::get('login', 'UserController@login');
-Route::post('login', 'UserController@loginprocess')->name('userlogging');
+Route::get('login', 'UserController@login')->name('login');
+Route::post('loginprocess', 'UserController@loginprocess')->name('userlogging');
 
 Route::get('userlist', 'UserController@userlist');
 
@@ -38,7 +33,7 @@ Route::get('userlist', 'UserController@userlist');
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['Userauthentication']], function () {
 
     Route::get('articlelistdisplay', 'ArticleController@articleListDisplay');
     Route::get('addarticle', 'ArticleController@articleFormDisplay')->name('articlename');
@@ -47,6 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/updatearticle/{article_id}','ArticleController@UpdateArticle')->name('updatearticle');
     Route::get('articledelete/{article_id}','ArticleController@DeleteArticle')->name('articledelete');
     Route::any('logoutarticle','UserController@LogoutArticle');
+    Route::get('userlist','UserController@userList');
+    Route::get('userarticlelist','UserController@userarticleList');
 
 });
 

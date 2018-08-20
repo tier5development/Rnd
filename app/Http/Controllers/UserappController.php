@@ -64,7 +64,7 @@ class UserappController extends Controller
 		      return response()->json([
 		      	'success'=>false,
 		      	'message'=>$e->getMessage()
-		      ],500);
+		      ],400);
     	}
 	}
 	/***********************User registration end********************/
@@ -81,33 +81,33 @@ class UserappController extends Controller
             'password' => 'required|min:4'
         ]);
 		try{
-        if($validator->fails()){
-        	return response()->json([
-        		'success'=>false,
-        		'message'=>$validator->errors()
-        	],400);
-        }
-         if (Auth::attempt(['email' => $email, 'password' => $password])){
-         	return response()->json([
-         		'success'=>true,
-         		'message'=>'Your login has been successfully done'
-         	],200);
-         }
+	        if($validator->fails()){
+	        	return response()->json([
+	        		'success'=>false,
+	        		'message'=>$validator->errors()
+	        	],400);
+	        }
+	         if (Auth::attempt(['email' => $email, 'password' => $password])){
+	         	return response()->json([
+	         		'success'=>true,
+	         		'message'=>'Your login has been successfully done'
+	         	],200);
+	         }
 
-         else{
-         	return response()->json([
-         		'success'=>false,
-         		'message'=>'Please check your authentication'
-         	],400);
-         }
-	}
-	catch(Exception $e){
-		return response()->json([
-			'success'=>false,
-			'message'=>$e->getMessage()
+	         else{
+	         	return response()->json([
+	         		'success'=>false,
+	         		'message'=>'Please check your authentication'
+	         	],400);
+	        }
+		}
+		catch(Exception $e){
+			return response()->json([
+				'success'=>false,
+				'message'=>$e->getMessage()
 
-		],500);
-	}
+			],400);
+		}
 	}
 	/***********************User Login end******************************/
 }

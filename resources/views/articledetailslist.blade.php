@@ -18,7 +18,8 @@
                     <div class="panel-heading">Article</div>
                      <div class="panel-heading"><a href='{!! url("addarticle"); !!}' class = 'btn btn-primary'>Add Article</a></div>
                     <div class="panel-body">
-                        <center><table border='1'>
+                      
+                        <center><table class="table table-striped">
                                 <tr>
                                     <th>Title</th>
                                     <th>Image</th>
@@ -26,13 +27,28 @@
                                      <th>Created</th>
                                     <th>Action</th>
                                 </tr>
-                                @if(!empty($articlelist)) 
-                                <tr>{{ 'No Record Found' }}</tr>
-                                @endif
+                                
+                               @if(count($articlelist) == 0)
+                                
+                                <tr><td colspan="5">No record found</td></tr>
+                                @else
                                 @foreach ($articlelist as $article)
                                 <tr>
                                     <td>{{ $article->title }}</td>
-                                    <td>{{ $article->image }}</td>
+                                  @if(!empty($article->image))
+
+                                 <?php $path=(base_path().'/public/articleimage/'.$article->image) ?>
+                                 
+                                 @if(file_exists($path))
+                                    <?php $image=$article->image; ?>
+                                  @else
+                                     {{ $image='No Image'}}
+                                   @endif
+                                 @else
+                                     {{ $image='No Image'}}
+                                  @endif
+
+                                    <td>{{$image}}</td>
                                      <td>{{$article->excerpt}}</td>
 
                                     <td>{{$article->created_at}}</td>
@@ -45,7 +61,7 @@
 
                                 </tr>
                                 @endforeach
-                                
+                                @endif
                             </table>
 
                             

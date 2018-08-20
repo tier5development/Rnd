@@ -47,9 +47,7 @@
                             <label for="image" class="col-md-4 control-label">Image</label>
                             <div class="col-md-6">
 
-                                
-
-                               <img  src='{{ asset("public/articleimage/$article_details->image")}}' width='100px' height='100px'>
+                               <img  src='{{ asset("/articleimage/$article_details->image")}}' width='100px' height='100px'>
                             </div>
                             <label for="image" class="col-md-4 control-label"></label>
                             <div class="col-md-6">

@@ -10,6 +10,8 @@ use App\Articlelist;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Illuminate\Support\Facades\Validator;
+
 
 
 
@@ -29,6 +31,27 @@ class ArticleController extends Controller {
 
     public function articleFormProcessing(Request $request) {
 
+        $validator=Validator::make($request->all(),[
+
+            'title'=>'required',
+            'content'=>'required',
+            'excerpt'=>'required',
+            'status'=>'required',
+            'image'=>'required|image'
+        ],[
+
+            'title.required'=>'title is required',
+            'content.required'=>'content is required',
+            'excerpt.required'=>'excerpt is required',
+            'status.required'=>'status is required',
+            'image.required'=>'image is required'
+        ]);
+        if($validator->fails()){
+            return redirect()->route('articlename')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        else{
         $article = new Articlelist();
         $user = Auth::user();
         $article->title=$request->title;
@@ -36,11 +59,16 @@ class ArticleController extends Controller {
         $article->excerpt=$request->excerpt;
         $article->status=$request->status;
         $article->user_id=$user->id;
+        if($request->hasFile('image')){
         $imagename = $request->file('image')->getClientOriginalName();
         $imagename=time().$imagename;
         $request->file('image')->move(
             base_path() . '/public/articleimage/', $imagename
         );
+        }
+        else{
+            $imagename='no_image.png';
+        }
         $article->image=$imagename;
         if($article->save()){
         $request->session()->flash('alert-success', 'Article has been successfully created !');
@@ -49,6 +77,7 @@ class ArticleController extends Controller {
     else{
         $request->session()->flash('alert-danger', 'Article has not been created !');
         return redirect()->action('ArticleController@articleListDisplay');
+    }
     }
 
     }
@@ -59,9 +88,11 @@ class ArticleController extends Controller {
     public function articleListDisplay(){
 
        $articlelist = \App\Articlelist::where('status', 'A')
+               ->where('user_id',Auth::user()->id)
                ->orderBy('id', 'desc')
                ->get();
         //dd($articlelist);
+               // return $articlelist;
         return view('articledetailslist',compact('articlelist'));
 
     }
@@ -141,41 +172,7 @@ class ArticleController extends Controller {
             return redirect()->action('ArticleController@articleListDisplay');
         }
     }
-<<<<<<< HEAD
-=======
-}
-
-public function LogoutArticle(){
-
-    Auth::logout();
-
-    return redirect()->action('UserController@login');
-
-}
+    /**************article form delete start**************/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> login
-
-    public function LogoutArticle(){
-
-        Auth::logout();
-
-        return redirect()->action('UserController@login');
-
-    }
 }

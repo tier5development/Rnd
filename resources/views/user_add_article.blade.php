@@ -59,23 +59,30 @@
                         
 
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('excerpt') ? ' has-error' : '' }}">
                             <label for="excerpt" class="col-md-4 control-label">Excerpt</label>
 
                             <div class="col-md-6">
                                 
                                 {!! Form::textarea('excerpt',null,array('id'=>'excerpt','class'=>'form-control')) !!}
-
+                                @if ($errors->has('excerpt'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('excerpt') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                             <label for="status" class="col-md-4 control-label">Status</label>
 
                             <div class="col-md-6">
 
-                                
                                 {!! Form::select('status', ['null'=>'Select Status','A' => 'Active', 'I' => 'Inactive'],['class' => 'form-control']) !!}
-
+                                @if ($errors->has('status'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                </span>
+                                @endif
                             </div>
                         </div>
 
@@ -96,7 +103,6 @@
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
-
 
 <script>
 $(document).ready(function (){
@@ -124,6 +130,6 @@ $(document).ready(function (){
 });  
 
 
-</script> 
+</script>  
 
 
