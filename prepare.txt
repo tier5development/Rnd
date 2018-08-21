@@ -1,0 +1,2 @@
+create new mentor project
+   setup the project
