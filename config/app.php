@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -227,7 +228,9 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
-         'Html' => Collective\Html\HtmlFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
     ],
 

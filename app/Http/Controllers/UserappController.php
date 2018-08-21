@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use luminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserappController extends Controller
 {
@@ -14,7 +16,6 @@ class UserappController extends Controller
 	/***********************User registration start******************/
 
 	public function registrationProcess(Request $request){
-			//dd($request->all());
 			$name=$request->name;
 			$gender=$request->gender;
 			$address=$request->address;
@@ -73,10 +74,12 @@ class UserappController extends Controller
 
 	public function loginProcess(Request $request){
 
-		$email=$request->email;
-		$password=$request->password;
+		//$email=$request->email;
+		//$password=$request->password;
+		$input = $request->only('email', 'password');
+        $jwt_token = null;
 
-		$validator = Validator::make($request->all(), [
+		$validator = Validator::make($input, [
             'email' => 'required|email',
             'password' => 'required|min:4'
         ]);
@@ -87,18 +90,19 @@ class UserappController extends Controller
 	        		'message'=>$validator->errors()
 	        	],400);
 	        }
-	         if (Auth::attempt(['email' => $email, 'password' => $password])){
+	         if (!$jwt_token = JWTAuth::attempt($input)){
 	         	return response()->json([
-	         		'success'=>true,
-	         		'message'=>'Your login has been successfully done'
-	         	],200);
+	         		'success'=>false,
+	         		'message'=>'Invalid Credentials'
+	         	],400);
 	         }
 
 	         else{
 	         	return response()->json([
-	         		'success'=>false,
-	         		'message'=>'Please check your authentication'
-	         	],400);
+	         		'success'=>true,
+	         		'message'=>'Your login has been successfully done',
+	         		'token'=>$jwt_token
+	         	],200);
 	        }
 		}
 		catch(Exception $e){

@@ -6,6 +6,8 @@ use App\Articlelist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 
 class ArticleApiController extends Controller
@@ -18,14 +20,15 @@ class ArticleApiController extends Controller
         $article_excerpt=$request->article_excerpt;
         $article_status=$request->article_status;
         $image=$request->file('image');
-        //$image=time().$image;
+        $token=$request->token;
         try{
         $article_validation=Validator::make($request->all(),[
                 'article_title'=>'required',
                 'article_content'=>'required',
                 'article_excerpt'=>'required',
                 'article_status'=>'required',
-                'image'=>'required'
+                'image'=>'required',
+                
             ]);
                 if($article_validation->fails()){
                     return response()->json([
@@ -44,13 +47,13 @@ class ArticleApiController extends Controller
                     $request->file('image')
                     ->move(base_path().'/public/articleimage/',$image);
                     $article->image=$image;
-                    //$user=Auth::user()->id;
-                    //$article->user_id=$user;
-                    $article->user_id=44;
+                    $user = JWTAuth::authenticate($token);
+                    $article->user_id=$user->id;
                     if($article->save()){
                     return response()->json([
                         'success'=>true,
-                        'message'=>'successfully done'
+                        'message'=>'successfully done',
+                        
                     ],200);
                     } 
                     else{
@@ -61,11 +64,11 @@ class ArticleApiController extends Controller
                     }  
         }
     }
-        catch(Exception $e){
+        catch(JWTException $exception){
             return response()->json([
                 'success'=>false,
                 'message'=>$e->getMessage()
-            ],500);
+            ],400);
 
         }
     
@@ -73,12 +76,24 @@ class ArticleApiController extends Controller
     /*****************Add article end***************/
 
     /*****************Article Listing start*********/
-    public function articleListing(){
+    public function articleListing(Request $request){
+        $token=$request->token;
         try{
+            $validator=Validator::make($request->all(),[
+                'token'=>'required',
+            ]);
+        if($validator->fails()){
+            return response()->json([
+                        'success'=>false,
+                        'message'=>$validator->errors()
+                    ],400);
+        }
+        else{
+        $user=JWTAuth::authenticate($token);
         $article_details=Articlelist::where('status','A')
-                         ->where('user_id',44)->paginate(10);
+                         ->where('user_id',$user->id)->paginate(10);
         //dd($article_details);
-        if(isset($article_details->items) && (!empty($article_details->items))){
+        if(count($article_details)>0){
             return response()->json([
                 'success'=>true,
                 'data'=>$article_details
@@ -88,8 +103,9 @@ class ArticleApiController extends Controller
             return response()->json(['success'=>false,'message'=>'No Record'],400);
         }
        } 
+   }
        catch(Exception $e){
-            return response()->json(['success'=>false,'message'=>$e->getMessage()],500);
+            return response()->json(['success'=>false,'message'=>$e->getMessage()],400);
        }
     }
 /*****************Article listing end************/
@@ -99,21 +115,22 @@ class ArticleApiController extends Controller
 public function editForm(Request $request){
     
         $article_id=$request->id;
+        $token=$request->token;
         try{
-        $article_details=Articlelist::where('id',$article_id)->first();
-        if(isset($article_details) && !empty($article_details)){
-            return response()->json([
-                'success'=>true,
-                'data'=>$article_details
-            ],200);
-        }
-        else{
-            return response()->json(['success'=>false,'message'=>'Record not found'],400);
-        }
-    }
-    catch(Exception $e){
-        return response()->json(['success'=>false,'message'=>$e->getMessage()],400);
-    }
+                $article_details=Articlelist::where('id',$article_id)->first();
+                if(count($article_details)>0){
+                    return response()->json([
+                        'success'=>true,
+                        'data'=>$article_details
+                    ],200);
+                }
+                else{
+                    return response()->json(['success'=>false,'message'=>'Record not found'],400);
+                }
+            }
+        catch(Exception $e){
+            return response()->json(['success'=>false,'message'=>$e->getMessage()],400);
+            }       
 }
 /*****************Article form edit display end**********************/
 
@@ -122,12 +139,13 @@ public function editForm(Request $request){
 public function updateForm(Request $request){
     
     $article_id=$request->article_id;
-    $image_hidden_value=$request->hidden_image;
+    $image=$request->image;
     $article_title=$request->title;
     $article_content=$request->content;
     $article_excerpt=$request->excerpt;
-    //$article_image=$request->file('image');
     $article_status=$request->status;
+    $token=$request->token;
+
     try{
         $validator=Validator::make($request->all(),
             [
@@ -135,22 +153,30 @@ public function updateForm(Request $request){
                 'content'=>'required',
                 'excerpt'=>'required',
                 'status'=>'required',
+                'image'=>'required|image'
+                
             ]);
         if($validator->fails()){
             return response()->json(['success'=>false,'message'=>$validator->errors()],400);
         }
         else{
             $article_details=Articlelist::where('id',$article_id)->first();
-            //dd($article_details);
             $article_details->title=$article_title;
             $article_details->content=$article_content;
             $article_details->excerpt=$article_excerpt;
             $article_details->status=$article_status;
-            $article_image=$request->file('image')->getClientOriginalName();
-            $article_image_rename=time().$article_image;
-            $request->file('image')->move(base_path().'/public/articleimage/',$article_image_rename);
-            $old_image_path=base_path().'/public/articleimage/'.$image_hidden_value;
-            unlink($old_image_path);
+            if($request->hasFile('image')){
+               $article_image=$request->file('image')->getClientOriginalName();
+                $article_image_rename=time().$article_image;
+                $request->file('image')->move(base_path().'/public/articleimage/',$article_image_rename); 
+        $old_image_path=base_path().'/public/articleimage/'.$article_details->image;
+                unlink($old_image_path);
+            }
+            else{
+                $article_image_rename='no_image.png';
+            }
+            
+            
             $article_details->image=$article_image_rename;
             if($article_details->save()){
                 return response()->json(['success'=>true,'message'=>'Update successfully'],200);
@@ -171,9 +197,10 @@ public function updateForm(Request $request){
 public function deleteArticle(Request $request){
 
     $article_id=$request->article_id;
+    $token=$request->token;
     try{
     $article_details=Articlelist::where('id',$article_id)->first();
-    if(isset($article_details) && !empty($article_details)){
+    if(count($article_details)>0){
         //dd(base_path().'/public/articleimage/'.$article_details->image);
         $article_details->delete();
         unlink(base_path().'/public/articleimage/'.$article_details->image);

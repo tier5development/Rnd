@@ -40,6 +40,8 @@ create login using REST API
 
 
 
+
+
 Registration V1.4 stable released to article_dev
 	Modified registration functionality
 
@@ -49,3 +51,7 @@ resolve V1.0 stable released to article_dev
 
 resolve V1.1 stable released to article_dev
         all article web functionality
+
+
+resolve V1.2 stable released to article_dev
+        create all functionalities using JWT authentication
