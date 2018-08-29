@@ -1,0 +1,20 @@
+/**
+ * Guideline
+ */
+
+1. Important Note : Please do not run the tests on production database. Make a test database and run the tests using that database. Otherwise after running the test it will delete all the database tables.
+
+2. Go to project root directory.
+
+3. Please checkout to "laravel-dusk" branch.
+
+4. And pull the latest codes from the "laravel-dusk" branch.
+
+5. Please use proper APP_URL for .env file
+
+APP_URL=http://dusk.dev
+
+6. Please run the below command to run all the tests
+
+Command: php artisan dusk
+
