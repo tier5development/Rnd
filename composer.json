@@ -1,0 +1,31 @@
+{
+    "name": "tier5/twilio-adapter-php",
+    "description": "Encapsulates Twilio SDK 5.x with 4.x methods",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "twilio/sdk": "^5.21.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.5.*",
+        "vlucas/phpdotenv": "^2.5.1",
+        "larapack/dd": "^1.1",
+        "monolog/monolog": "^1.23.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        },
+        "files": [
+            "vendor/larapack/dd/src/helper.php"
+        ]
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Tier5 LLC",
+            "email": "work@tier5.us"
+        }
+    ],
+    "minimum-stability": "dev"
+}
