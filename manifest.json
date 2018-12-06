@@ -1,0 +1,26 @@
+﻿{
+  "name": "mytest",
+  "description": "Its a website for scanning email and phone no.",
+  "manifest_version": 2,
+  "version": "0.1",
+  "icons": {
+    "128": "images.png"
+  },
+  "browser_action": {
+  "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["content.js"]
+      
+    }
+  ]
+}
