@@ -7,5 +7,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Code' });
 });
 
+router.get('/newBranch', function(req, res, next) {
+  res.render('index', { title: 'new Code' });
+});
 
 module.exports = router;
