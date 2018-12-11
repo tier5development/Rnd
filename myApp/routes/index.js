@@ -11,4 +11,8 @@ router.get('/newBranch', function(req, res, next) {
   res.render('index', { title: 'new Code' });
 });
 
+router.get('/newBranch4', function(req, res, next) {
+  res.render('index', { title: 'new Code 4' });
+});
+
 module.exports = router;
