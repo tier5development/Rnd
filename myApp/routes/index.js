@@ -21,4 +21,10 @@ router.get('/newBranch5', function(req, res, next) {
   res.render('index', { title: 'new Code 5' });
 });
 
+
+router.get('/rebase', function(req, res, next) {
+  res.render('index', { title: 'rebase' });
+
+});
+
 module.exports = router;
