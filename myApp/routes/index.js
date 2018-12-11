@@ -6,8 +6,6 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'feature_branch_by_gautam' });
 });
-router.get('/new', function(req, res, next) {
-  res.render('index', { title: 'New Route from rnd_by_gautam branch' });
-});
+
 
 module.exports = router;
