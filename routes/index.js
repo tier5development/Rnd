@@ -19,7 +19,7 @@ router.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, re
   //   response.status(400).send(`Webhook Error: ${err.message}`);
   // }
 
-  console.log("event :: ", JSON.stringify(request.body))
+  // console.log("event :: ", JSON.stringify(request.body))
 
   // // Handle the event
   // switch (event.type) {
@@ -38,7 +38,7 @@ router.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, re
   // }
 
   // Return a response to acknowledge receipt of the event
-  response.json({received: true});
+  response.json({ received: request.body});
 });
 
 module.exports = router;
