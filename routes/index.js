@@ -10,16 +10,16 @@ router.get('/', function(req, res, next) {
 
 // Match the raw body to content type application/json
 router.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
-  let event;
+  // let event;
 
-  try {
-    event = JSON.parse(request.body);
-  }
-  catch (err) {
-    response.status(400).send(`Webhook Error: ${err.message}`);
-  }
+  // try {
+  //   event = JSON.parse(request.body);
+  // }
+  // catch (err) {
+  //   response.status(400).send(`Webhook Error: ${err.message}`);
+  // }
 
-  console.log("event :: ", JSON.stringify(event.type))
+  console.log("event :: ", JSON.stringify(request.body))
 
   // // Handle the event
   // switch (event.type) {
