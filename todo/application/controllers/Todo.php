@@ -22,7 +22,6 @@ class Todo extends CI_Controller {
 
    public function index()
    {
-
         if ($this->session->userdata('isUserLoggedIn') == FALSE) {
         redirect('users/login');
       }

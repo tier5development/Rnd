@@ -29,6 +29,7 @@ class Users extends CI_Controller {
          
         if($this->isUserLoggedIn){ 
             redirect('Todo'); 
+            die();
         }else{
 
 

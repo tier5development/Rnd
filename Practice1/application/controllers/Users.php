@@ -79,7 +79,6 @@ class Users extends CI_Controller {
         } 
          
         // Load view 
-        // TODO: Load all the child view files from a master view file
         $this->load->view('elements/header', $data); 
         $this->load->view('users/login', $data); 
         $this->load->view('elements/footer'); 
@@ -95,7 +94,7 @@ class Users extends CI_Controller {
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check'); 
             $this->form_validation->set_rules('password', 'password', 'required'); 
             $this->form_validation->set_rules('conf_password', 'confirm password', 'required|matches[password]'); 
-            // TODO: This block is not needed if the validation is not passed
+ 
             $userData = array( 
                 'first_name' => strip_tags($this->input->post('first_name')), 
                 'last_name' => strip_tags($this->input->post('last_name')), 
