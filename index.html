@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Extension Exercise in JS/JQuery</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <style>
+            .container {
+                display: none;
+            }
+
+            #submit {
+                margin-top: 5px;
+            }
+
+            #table {
+                margin-top: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <button id="button" class="btn btn-outline-primary" onclick="show1()">ADD PRODUCT</button>
+        </div>
+
+        <div class="container" id="main">
+            <h1>CREATE PRODUCT</h1>
+            <form>
+                <div class="input-row"><b>Product Name: </b><input type="text" name="pname" id="pname" /> <b>Category:</b><input type="text" name="pcat" id="pcat" /></div>
+                <button id="submit" class="btn btn-dark" onclick="show2()">Submit</button>
+            </form>
+        </div>
+
+        <table id="table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <script src="./index.js"></script>
+    </body>
+</html>
