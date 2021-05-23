@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Extension Exercise in JS/JQuery</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -28,8 +28,13 @@
         <div class="container" id="main">
             <h1>CREATE PRODUCT</h1>
             <form>
-                <div class="input-row"><b>Product Name: </b><input type="text" name="pname" id="pname" /> <b>Category:</b><input type="text" name="pcat" id="pcat" /></div>
-                <button id="submit" class="btn btn-dark" onclick="show2()">Submit</button>
+                <div class="input-row">
+                    <input type="hidden" name="pid" id="pid" value="NA" /> <br />
+                    <b>Product Name: </b><input type="text" name="pname" id="pname" /> <br />
+                    <br />
+                    <b>Category:</b><input type="text" name="pcat" id="pcat" />
+                </div>
+                <button id="submit" class="btn btn-dark" onclick="hide()">Submit</button>
             </form>
         </div>
 
@@ -42,7 +47,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="tbody1"></tbody>
         </table>
 
         <script src="./index.js"></script>

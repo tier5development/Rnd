@@ -1,46 +1,107 @@
+function displayProduct() {
+    let productArr = getTasksFromLocalStorage();
+
+    str = "";
+    var i;
+    for (i = 0; i < productArr.length; i++) {
+        str =
+            str +
+            "<tr width: 100%><td>" +
+            productArr[i].pname +
+            "</td><td>" +
+            productArr[i].pcat +
+            '</tpd><td><button id="edit-' +
+            productArr[i].pid +
+            '" class="editBtn">Edit</button></td><td><button id="del-' +
+            productArr[i].pid +
+            '" class="deleteBtn">Delete</button></td></tr>';
+    }
+
+    $("#tbody1").html(str);
+}
+
+function getTasksFromLocalStorage() {
+    let productArr = JSON.parse(localStorage.getItem("productArr") || "[]");
+    return productArr;
+}
+
+function saveTaskTolocalStorage(productArr) {
+    localStorage.setItem("productArr", JSON.stringify(productArr));
+    let product = getTasksFromLocalStorage();
+    console.log("product", product);
+}
+
 function show1() {
     var div = document.getElementById("main");
     div.style.display = "block";
 }
 
-const formEl = document.querySelector("form");
-const tbodyEl = document.querySelector("tbody");
-const tableEl = document.querySelector("table");
+function hide() {
+    let productArr = getTasksFromLocalStorage();
+    let pname = document.getElementById("pname").value;
+    let pcat = $("#pcat").val();
+    let pid = $("#pid").val();
 
-function add(e) {
-    e.preventDefault();
+    if (pid == "NA") {
+        pid = Date.now();
 
-    let prodName = document.getElementById("pname").value;
+        productArr.push({
+            pid: pid,
+            pname: pname,
+            pcat: pcat,
+        });
+        console.log(JSON.stringify(productArr));
+        saveTaskTolocalStorage(productArr);
+        displayProduct();
+    } else {
+        let productArr = getTasksFromLocalStorage();
+        productArr.map((product) => {
+            if (product.pid == pid) {
+                product.pname = pname;
+                product.pcat = pcat;
+            }
+        });
 
-    let category = document.getElementById("pcat").value;
-
-    tbodyEl.innerHTML += `
-             <tr>
-                 <td>${prodName}</td>
-                 <td>${category}</td>
-                 <td><button class="deleteBtn btn-warning"">Delete</button></td>
-                 <td><button class="editBtn btn-success"">Edit</button></td>
-             </tr>
-         `;
-
-    let localItems = JSON.parse(localStorage.getItem("localItems") || "[]");
-    let allItems = [...localItems, { id: Date.now(), productName: prodName, productCategory: category }];
-    localStorage.setItem("localItems", JSON.stringify(allItems));
-}
-
-function onDeleteRow(e) {
-    if (!e.target.classList.contains("deleteBtn")) {
-        return;
+        console.log("productArr", productArr);
+        saveTaskTolocalStorage(productArr);
+        displayProduct();
     }
 
-    const btn = e.target;
-    btn.closest("tr").remove();
-}
-
-formEl.addEventListener("submit", add);
-tableEl.addEventListener("click", onDeleteRow);
-
-function show2() {
     var div = document.getElementById("main");
     div.style.display = "none";
 }
+
+$("body").on("click", ".editBtn", function () {
+    let id = $(this).attr("id");
+    let res = id.split("-");
+    let pid = res[1];
+
+    let productArr = getTasksFromLocalStorage();
+    const resultArr = productArr.filter((product) => product.pid == pid);
+
+    $("#pid").val(pid);
+    $("#pname").val(resultArr[0].pname);
+    $("#pcat").val(resultArr[0].pcat);
+
+    var div = document.getElementById("main");
+    div.style.display = "block";
+});
+
+$("body").on("click", ".deleteBtn", function () {
+    let id = $(this).attr("id");
+    let res = id.split("-");
+    let pid = res[1];
+    let productArr = getTasksFromLocalStorage();
+    const resultArr = productArr.filter((product) => product.pid != pid);
+
+    saveTaskTolocalStorage(resultArr);
+    displayProduct();
+});
+
+$("#submit").click(function (event) {
+    event.preventDefault();
+});
+
+$(document).ready(function () {
+    displayProduct();
+});
