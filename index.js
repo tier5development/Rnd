@@ -28,7 +28,7 @@ function getTasksFromLocalStorage() {
 function saveTaskTolocalStorage(productArr) {
     localStorage.setItem("productArr", JSON.stringify(productArr));
     let product = getTasksFromLocalStorage();
-    console.log("product", product);
+    
 }
 
 function show1() {
