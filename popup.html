@@ -1,0 +1,47 @@
+
+<html>
+    <head>
+        <title>List of Product</title>
+        <style>
+            .container {
+                display: none;
+            }
+        </style>
+    </head>
+    <body onload="init()">
+        <style>
+            html, body {   
+            height: 450px;
+            width: 350px;
+            background-color:pink;
+            margin: 0;
+            padding: 0;
+          }
+            </style>
+            <div align="center" class="form">
+                <button type="submit" id="button"class="button"><h1>ADD PRODUCT</h1></button>
+            </div>
+            <div align="center" class="container" id="main">
+                <h2>Create Product</h2>
+           <div class="input"><h3>Product Name:</h3> <input id="name" value="product1" type="text" placeholder="product1" /></div>
+           <div class="input"><h3>Category:</h3><input id="category" value="category1" type="text" placeholder="category1" /></div>
+           <button align="center"  id="submit" class="submit">Submit</button>
+       </div>
+        <table  id="display" class="display" align="center">
+                <h2 align="center">Product List</h2>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tablerows">
+
+                </tbody>
+        </table>
+       
+    </div>
+    <script src="./popup.js"></script>
+    </body>
+</html>
