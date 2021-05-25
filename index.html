@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Extension Exercise in JS/JQuery</title>
+        <script src="./jquery.min.js"></script>
+
+        <style>
+            .container {
+                display: none;
+            }
+
+            #submit {
+                margin-top: 5px;
+            }
+
+            #table {
+                margin-top: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <button id="button" class="btn1">ADD PRODUCT</button>
+        </div>
+
+        <div class="container" id="main">
+            <h1>CREATE PRODUCT</h1>
+            <form>
+                <div class="input-row">
+                    <input type="hidden" name="pid" id="pid" value="NA" /> <br />
+                    <b>Product Name: </b><input type="text" name="pname" id="pname" /> <br />
+                    <br />
+                    <b>Category:</b><input type="text" name="pcat" id="pcat" />
+                </div>
+                <button id="submit" class="btn">Submit</button>
+            </form>
+        </div>
+
+        <table id="table" class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbody1"></tbody>
+        </table>
+
+        <script src="./index.js"></script>
+    </body>
+</html>
