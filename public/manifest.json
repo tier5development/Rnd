@@ -1,0 +1,25 @@
+{
+    "name":"Product List",
+    "version": "1.0.1",
+    "description": "This extension will help you to show a given list by user" ,
+    "manifest_version": 2,
+    "permissions": ["tabs", "storage", "https://www.google.com/"],
+    "browser_action": 
+    {
+        "default_popup":"popup.html"
+    },
+
+    "icons": {
+           "48": "./image/Facebook-48.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.google.com/*"],
+            "js": ["jquery.min.js", "popup.js"]
+        }
+    ]
+   
+ }
+
+ 
+ 
