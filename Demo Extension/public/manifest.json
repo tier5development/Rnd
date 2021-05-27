@@ -1,0 +1,29 @@
+{
+    "name": "Demo Extension",
+    "version": "1.0.1",
+    "description": "This is a demo extension",
+    "manifest_version": 2,
+    "permissions": ["tabs", "storage", "https://www.google.com/"],
+
+    "background": {
+        "scripts": ["src/background.js"],
+        "persistent": false
+    },
+
+    "browser_action": {
+        "default_popup": "login.html"
+    },
+
+    "icons": {
+        "48": "./images/48R.png",
+        "128": "./images/128R.png"
+    },
+
+     "content_scripts": [
+         {
+            "matches": ["https://www.google.com/*"],
+             "js": ["src/jquery.min.js","src/index.js"],
+             "run_at":"document_end"
+         }
+    ]
+}
