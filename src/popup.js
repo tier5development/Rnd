@@ -1,110 +1,72 @@
-/*--------------------------------------<second part>------------------------------------*/
 
-var selectedRow = null;
-
-document.querySelector("#div1").addEventListener("click", function (event) {
-  var x = document.querySelector("#div1");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-    document.querySelector("#div3").style.display = "none";
-    document.querySelector("#div2").style.display = "block";
-  }
-  event.preventDefault();
-});
-
-function getLocalStorage() {
-  let productarr = JSON.parse(localStorage.getItem("productarr") || "[]");
-  return productarr;
-}
-
-function printTable() {
-  let productarr = getLocalStorage();
-  let str = "";
-  for (var i = 0; i < productarr.length; i++) {
-    str =
-      str +
-      "<tr><td>" +
-      productarr[i].fullName +
-      "</td><td>" +
-      productarr[i].empCode +
-      '</td><td><button id="edi-' +
-      productarr[i].pid +
-      '" class="btnedit">edit</button><button id="del-' +
-      productarr[i].pid +
-      '" class="btnDel">delete</button></td> </tr>';
-  }
-  $("#tblbody").html(str);
-}
-
-function toLocalStorage(product) {
-  localStorage.setItem("productarr", JSON.stringify(product));
-  let productarr = getLocalStorage();
-}
-
-document.querySelector("#button").addEventListener("click", function (event){
-  event.preventDefault();
-  printTable();
-  let productarr = getLocalStorage();
-  var product = productarr;
-  let fullName = document.getElementById("fullName").value;
-  let empCode = document.getElementById("empCode").value;
-  let pid = document.getElementById("pid").value;
-
-  if (pid == "NA") {
-    // add
-    pid = Date.now();
-    product.push({
-      pid: pid,
-      fullName: fullName,
-      empCode: empCode,
-    });
-    toLocalStorage(product);
-    printTable();
-  } else {
-    // edit
-    let productarr = getLocalStorage();
-    productarr.map((product) => {
-      if (product.pid == pid) {
-        product.fullName = fullName;
-        product.empCode = empCode;
-      }
-    });
-    toLocalStorage(productarr);
-    printTable();
-  }
-  document.querySelector("#div2").style.display = "none";
-  document.querySelector("#div1").style.display = "block";
-  document.querySelector("#div3").style.display = "block";
-
-})
-
-
+ 
 $(document).ready(function () {
-  printTable();
+  init();
 });
 
-$("body").on("click", ".btnDel", function () {
-  let id = $(this).attr("id");
-  let res = id.split("-");
-  let pid = res[1];
-  let productarr = getLocalStorage();
-  const resultArr = productarr.filter((product) => product.pid != pid);
-  localStorage.setItem("productarr", JSON.stringify(resultArr));
-  printTable();
+var listArray = [];
+function init() {
+    document.getElementById("tablerows").innerHTML = "";
+    if (localStorage.allTasks) {
+        listArray = JSON.parse(localStorage.allTasks);
+        for (var i = 0; i < listArray.length; i++) {
+            prepareTableCell(i, listArray[i].name, listArray[i].category);
+        }
+    }
+}
+
+//When add product button clicked
+document.querySelector(".button").addEventListener("click", function () {
+    document.querySelector(".container").style.display = "block";
+    var div = document.getElementById("main");
+    div.style.display = "block";
 });
 
-$("body").on("click", ".btnedit", function () {
-  $("#div1").hide();
-  $("#div2").show();
-  $("#div3").hide();
-  let id = $(this).attr("id");
-  let res = id.split("-");
-  let pid = res[1];
-  let productarr = getLocalStorage();
-  const resultarr = productarr.filter((product) => product.pid == pid);
-  $("#pid").val(pid);
-  $("#fullName").val(resultarr[0].fullName);
-  $("#empCode").val(resultarr[0].empCode);
+//when submit button clicked
+document.querySelector(".submit").addEventListener("click", function () {
+    var pName = document.getElementById("name").value;
+    var pCategory = document.getElementById("category").value;
+    var listObj = { name: pName, category: pCategory };
+    if (selectedIndex === -1) {
+        listArray.push(listObj);
+    } else {
+        listArray.splice(selectedIndex, 1, listObj);
+    }
+    localStorage.allTasks = JSON.stringify(listArray);
+    init();
+    document.getElementById("name").value = "";
+    document.getElementById("category").value = "";
+    var div = document.getElementById("main");
+    div.style.display = "none";
 });
+
+function prepareTableCell(index, pName, pCategory) {
+    var table = document.getElementById("tablerows");
+    var row = table.insertRow();
+    var pNameCell = row.insertCell(0);
+    var pCategoryCell = row.insertCell(1);
+    var actionCell = row.insertCell(2);
+
+    pNameCell.innerHTML = pName;
+    pCategoryCell.innerHTML = pCategory;
+    actionCell.innerHTML = '<button class="onEdit">Edit</button><button  class="deleteTableRow"(' + index + ') >Delete</button>';
+}
+
+//When delete button clicked
+$("table tbody").on("click", ".deleteTableRow", function (index) {
+    listArray.splice(index,1);
+    console.log(listArray);
+   localStorage.allTasks=JSON.stringify(listArray);
+   init();
+});
+
+//When edit button clicked
+ var selectedIndex = -1;
+    $("table tbody").on("click", ".onEdit", function (index) {
+           selectedIndex=index;
+            var div = document.getElementById("main");
+            div.style.display = "block";
+            document.getElementById("submit").innerHTML="Update";
+            init();
+        });
+        

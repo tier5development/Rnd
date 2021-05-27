@@ -1,62 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/style.css" />
-   
+
+<html>
+  <head>
     <script src="jquery-3.6.0.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
+      <title>List of Product</title>
+      <style>
+          .container {
+              display: none;
+          }
+      </style>
+  </head>
+  <body onload="init()">
+      <style>
+          html, body {   
+          height: 450px;
+          width: 350px;
+          background-color:pink;
+          margin: 0;
+          padding: 0;
+        }
+          </style>
+          <div align="center" class="form">
+              <button type="submit" id="button"class="button"><h1>ADD PRODUCT</h1></button>
+          </div>
 
-<!------------------------------------------------ AddProduct part------------------------------------------>
+          <div align="center" class="container" id="main">
+              <h2>Create Product</h2>
 
-    <!-------------------- create a button named "ADD PRODUCT" -------------------------------->
+         <div class="input"><h3>Product Name:</h3> <input id="name" value="product1" type="text" placeholder="product1" /></div>
+         <div class="input"><h3>Category:</h3><input id="category" value="category1" type="text" placeholder="category1" /></div>
+         <button align="center"  id="submit" class="submit">Submit</button>
 
-    <div id="raunok"  >
-      <button id="div1">ADD PRODUCT</button>
-    </div>
-    <br />
+     </div>
+     
+      <table  id="display" class="display" align="center">
+              <h2 align="center">Product List</h2>
+              <thead>
+                  <tr>
+                      <th>Product Name</th>
+                      <th>Category</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody id="tablerows">
 
-    <!------------------ create a form named "Create Product" --------------------------------->
-
-    <div id="div2" style="width: 200px; display:none;" >
-      <h1 style="text-align: center">Create Product</h1>
-
-      <form>
-        <div>
-          <input type="hidden" name="pid" id="pid" value="NA" />
-          <label>Name</label><label class="validation-error hide" id="fullNameValidationError"></label>
-          <input type="text" name="fullName" id="fullName" />
-        </div>
-        <div>
-          <label>Category</label>
-          <input type="text" name="empCode" id="empCode" />
-        </div>
-        <div class="form-action-buttons">
-          <input type="submit" id="button" value="Submit" />
-        </div>
-      </form>
-    </div>
-
-    <!-------------------- List of the product table part---------------------------------------->
-
-    <div id="div3" style="width: 200px; display:none;">
-      <h1 style="text-align: center">Product list</h1>
-      <table class="list" id="employeeList">
-        <thead>
-          <tr>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="tblbody"></tbody>
+              </tbody>
       </table>
-    </div>
-
-  <script src="js/popup.js"></script>
-</body>
+     
+  </div>
+  <script src="./popup.js"></script>
+  </body>
 </html>
