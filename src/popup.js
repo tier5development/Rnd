@@ -1,20 +1,4 @@
- /*-----------------------------------------<first part>------------------------------------*/  
- 
- 
- document.querySelector("#login").addEventListener("click", function (event) {
-  event.preventDefault();
-  document.querySelector("#raunok").style.display = "block";
-  document.querySelector("#div3").style.display = "block";
-  document.querySelector("#div0").style.display = "none";
- });
- 
-
-
-
-
-
-
-  /*--------------------------------------<second part>------------------------------------*/
+/*--------------------------------------<second part>------------------------------------*/
 
 var selectedRow = null;
 
