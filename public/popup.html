@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css" />
+   
+    <script src="jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+</head>
+<body style="width: 200px; height:200px">
+
+
+    <!------------------ create a form named "Create Product" --------------------------------->
+
+    <div id="div2" style="width: 200px;" >
+      <h1 style="text-align: center">Enter Name</h1>
+
+      <form>
+        <div>
+          <!-- <input type="hidden" name="pid" id="pid" value="NA" /> -->
+          <label>Name</label><label class="validation-error hide" id="fullNameValidationError"></label>
+          <input type="text" name="fullName" id="fullName" />
+        </div>
+        
+        <ol id="olTag">
+          
+        </ol>
+        <div class="form-action-buttons">
+          <input type="submit" id="addBtn" value="Submit" />
+        </div>
+      </form>
+    </div>
+
+    <!-------------------- List of the product table part---------------------------------------->
+
+    <div id="div3" style="width: 200px; display:none;">
+      <h1 style="text-align: center">Product list</h1>
+      <table class="list" id="employeeList">
+        <thead>
+          <tr>
+            <th> Name List</th>
+            <!-- <th>Category</th>
+            <th>Action</th> -->
+          </tr>
+        </thead>
+        <tbody id="tblbody"></tbody>
+      </table>
+    </div>
+
+  
+  <script src="js/popup.js"></script>
+</body>
+</html>
