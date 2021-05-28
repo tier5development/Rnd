@@ -1,0 +1,60 @@
+
+{
+    "extId": "5fdc50ae1c35d67802639bc5",
+    "appName": "Extension task",
+    "loginURL": "https://app.kyubi.io/api/end-user/login",
+    "logoutURL": null,
+    "forgotPassURL": "https://app.kyubi.io/api/end-user/generate-password-token",
+    "changePassURL": "https://app.kyubi.io/api/end-user/update-password",
+    "checkUserStatusURL": "https://app.kyubi.io/api/end-user/get-status",
+    "youtubeLink": "https://www.youtube.com/embed/0I6yp6hYlPY",
+    "youtubeLink2": null,
+    "signupURL": null,
+    "description": {
+        "short_description": "Make your friend list bigger and valuable with a single click",
+        "long_description": "Make your friend list bigger and valuable with a single click"
+    },
+    "logo": {
+        "small_icon": "./images/icon16X16.png",
+        "medium_icon": "./images/icon48X48.png",
+        "large_icon": "./images/icon128X128.png",
+        "primary_logo": "./images/logo.png",
+        "secondary_logo": null,
+        "background_image": "./images/logo.png"
+    },
+    "loader": {
+        "preLoader": "./images/loading.gif",
+        "replyLoader": null,
+        "customLoader": null
+    },
+    "footer": {
+        "showFooter": true,
+        "poweredBy": {
+            "label": "Tier5",
+            "url": "https://www.tier5.us/",
+            "willBeDisplayed": true
+        },
+        "partnership": {
+            "label": "Tier5 Partnership",
+            "url": "https://partnership.tier5.us/jr-partner1",
+            "willBeDisplayed": true
+        },
+        "chatSupport": {
+            "label": "Chat Support",
+            "url": "https://www.messenger.com/t/111628720269221",
+            "willBeDisplayed": true
+        },
+        "officialGroup": {
+            "label": "Official Facebook Group",
+            "url": "https://www.facebook.com/groups/friendconnector",
+            "willBeDisplayed": true
+        }
+    },
+    "isLive": false,
+    "advertisementTextHtml": null,
+    "mailTo": "support@tier5.us",
+    
+    "publicVapidKey":"BHcFkqcSHe3BS6EPkUWzYCXM2v4nSd541MqGyEao2EaSQeaQ_xfZrb8IcSasVN1G5pAwmDpXLNIjR7kTnEePOCA",
+    "clearSubscriptionObjectURL": "https://app.kyubi.io/api/clear-subscription-object",
+    "registerNotificationView": "https://app.kyubi.io/api/notification-view"
+}
