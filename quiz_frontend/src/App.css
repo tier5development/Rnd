@@ -1,0 +1,9 @@
+.App{
+    background-color: darkslategrey;
+    height: 60px;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
