@@ -1,0 +1,11 @@
+Create your branch from test_domManupulation_V1 branch and name as test_yourName(ex : test_susmita)
+Make a chrome Extension without webpack, node environment and don't minify the build.
+	sub task 1 : take a input in popup and a button to submit
+	sub task 2 : user will give a input in input box then when they will submit then a facebook page will open
+	sub task 3 : If the user provided input and facebook name, or facebook id or facebook user name,or nick name  is matching then show the user details(facebook name, Faceboook id, facebook user name,  		     	     facebook nickname) in extension poopup
+		     else show a alert that facebook name has not matched please provide your facebook name
+	sub task 4 : make table of these data. In each row each data with delete button will be there.  
+	sub task 5 : If user will click delete buttons then respective data will be deleted and rest of the data will show in the popup
+	sub task 6 : If all data is deleted then redirect to first page (*sub task 1)
+push in your branch
+After pushing inform me
