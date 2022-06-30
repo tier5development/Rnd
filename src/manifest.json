@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "My FaceBook Extension",
+    "version": "1.0.0",
+    "description": "This is very first cool extension",
+    
+    "permissions": [
+        "bookmarks",
+        "storage",
+        "tabs"
+    ],
+
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.facebook.com/*",
+                "https://m.facebook.com/*"
+            ],
+            "js": [
+                "jquery.min.js",
+                "contentFaceBook.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    
+    "action": {
+        "default_title": "Developped By Ankur",
+        "default_popup": "popup.html"
+    }
+}
