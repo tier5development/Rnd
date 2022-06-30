@@ -13,9 +13,9 @@
             if(groupIdContainerString === value || name === value || userName === value ){
                 // window.alert(groupIdContainerString);
                 const dataObj = {
-                    "Name":name,
-                    "URL": userName,
-                    "Id": groupIdContainerString
+                    "name":name,
+                    "url": userName,
+                    "id": groupIdContainerString
                 }
                 chrome.storage.local.set({"payload": dataObj}, function(res) {
             

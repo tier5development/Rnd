@@ -11,8 +11,5 @@ clickMe.addEventListener("click", function() {
             console.log('Value is set to ' + res);
           });
     }
-    const seeData = document.getElementById("seeData").addEventListener("click", function() {
-        location.href = "table.html"
-    })
 
 }) 
