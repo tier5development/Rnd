@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Facebook Table Data</title>
+  </head>
 
-   <head>
-      <title>Facebook Table Data</title>
-   </head>
-	
-   <body>
-      <table border = "2" id="tbl">
-         <tr id="data">
-            <td>Name</td>
-            <td>ID</td>
-            <td>URL</td>
-         </tr>
+  <body>
+    <div id="tableDiv">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody id="tblBody">
+        </tbody>
       </table>
-      <script src="table.js"></script>
-   </body>
-   
+    </div>
+    <script src="table.js"></script>
+  </body>
 </html>

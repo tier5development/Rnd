@@ -6,9 +6,9 @@ clickMe.addEventListener("click", function() {
     }
     else{
         window.open('https://m.facebook.com/me/')
-        chrome.storage.local.set({"value": inpValue}, function(res) {
+        chrome.storage.local.set({"value": inpValue}, function() {
 
-            console.log('Value is set to ' + res);
+            console.log('Value is set to ' + inpValue);
           });
     }
 
