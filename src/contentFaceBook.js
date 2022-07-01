@@ -10,37 +10,50 @@ function getParameter(keyArr) {
     });
 }
 
+function setParameter(keyObj) {
+    return new Promise((resolve) => {
+      chrome.storage.local.set(keyObj, function (err, data) {
+          if (err) {
+            resolve({
+                'isError': true
+            })
+          } else {
+            resolve({
+                'isError': false
+            })
+          }    
+      });
+    });
+}
+
 
 $(document).ready(async function(){
 
-    const keyArr = ['fbName'];
-    const resultStatus = await getParameter(keyArr);
+    var keyArr = ['fbName'];
+    var resultStatus = await getParameter(keyArr);
 
-    const profileName = resultStatus.data.fbName;
+    const enteredValue = resultStatus.data.fbName;
     const profileUrl = window.location.href;
 
-    console.log("profileUrl", profileUrl);
-
     const userName = profileUrl.split("?")[0].split("/")[3];
-    
-    // Here, we checking if the profile name is authentic or not
-    const userNameArr = userName.split(".");
-    const profileNameArr = profileName.split(" ");
+    const scrappedProfileName = $("#cover-name-root").text();
 
-    let isMismatched = false; // this tag determine whether the user authentic or not
-    for (let i = 0; i < profileNameArr.length; i++) {
-        console.log("vvv",userNameArr.includes(profileNameArr[i].toLowerCase()))
-        if (!userNameArr.includes(profileNameArr[i].toLowerCase())) {
-            isMismatched = true;
-            break;
-        }
-    }
+    const dataSigil = $('div[data-sigil="timeline-cover"]').find('a[href^="/photo.php?"]').attr('href');
+    const faceBookId = dataSigil.split('&id=')[1].split('&')[0];
 
-    if (isMismatched) {
-        alert("You have given wrong profile name");
+    if (!(enteredValue == scrappedProfileName || enteredValue == userName || enteredValue == faceBookId)) {
+        alert("You have given wrong information");
         return;
     }
 
+    let userDetails = {
+        "profileName": scrappedProfileName ? scrappedProfileName : '',
+        "faceBookId": faceBookId ? faceBookId : '',
+        "userName": userName ? userName : ''
+    };
 
+    var keyObj = { 'userDetails': userDetails };
+    await setParameter(keyObj);
 
+    console.log("faceBookId", faceBookId);
 });
