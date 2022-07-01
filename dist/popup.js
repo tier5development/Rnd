@@ -1,13 +1,15 @@
 let submit = document.getElementById("submit");
-let fb_id = document.getElementById("fb_id");
 
-$(document).on("click", submit, () => {
-    let queryOptions = {active: true, currentWindow: true};
+submit.addEventListener("click", function() {
+    const fb_id = document.getElementById("fb_id").value;
+    if(fb_id == ""){
+        window.alert("Please enter facebook name")
+    }
+    else{
+        window.open('https://facebook.com/me/')
+        chrome.storage.local.set({"value": fb_id}, function(res) {
 
-    chrome.tabs.query(queryOptions, (tabs) => {
-       chrome.tabs.sendMessage(
-            tabs[0].id,
-            {task: "open", link: "facebook"}
-        )
-    })
+            console.log('Value is set to ' + res);
+        });
+    }
 })
