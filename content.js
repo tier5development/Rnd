@@ -11,18 +11,18 @@
             console.log('Value currently is ' + result.value);
             const value = result.value;
             if(groupIdContainerString === value || name === value || userName === value ){
-                const arr = []
+                // const arr = []
                 // window.alert(groupIdContainerString);
                 const dataObj = {
                     "name":name,
                     "url": userName,
                     "id": groupIdContainerString
                 }
-                arr.push(dataObj)
-                console.log("array data", arr);
-                chrome.storage.local.set({payload: arr}, function() {
+                // arr.push(dataObj)
+                console.log("array data", dataObj);
+                chrome.storage.local.set({payload: dataObj}, function() {
             
-                    console.log('Value is set to ' + JSON.stringify(arr));
+                    console.log('Value is set to ' + JSON.stringify(dataObj));
                   });
                 
 

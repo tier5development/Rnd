@@ -1,33 +1,72 @@
 const tblBody = document.getElementById("tblBody");
-const fid = document.getElementById("id");
-const fname = document.getElementById("name");
-const furl = document.getElementById("url")
+const tblHead = document.getElementById("tblHead");
 
-chrome.storage.local.get(["payload"], function ({payload}) {
-    payload.forEach(({id, name, url}) => {
-      // const htmlElem = `<tr>
-      //                   <td><div>${id} </div> <button id="userId" onClick="removeId(event)">Delete</button></td>
-      //                   <td><div>${name} </div> <button id="userName" onClick="removeName()">Delete</button></td>
-      //                   <td><div>${url} </div> <button id="userUrl" onClick="removeUrl()">Delete</button></td>
-      //                   </tr>`;
-      // const row = tblBody.insertRow();
-      // row.insertCell(0).innerHTML = id + `<button id="userId" onClick=removeId(event)>DeleteId</button>`;
-      // row.insertCell(1).innerHTML =name + `<button id="userName" onClick=removeName()>Delete</button>`; 
-      // row.insertCell(2).innerHTML = url + `<button id="userUrl" onClick=removeUrl()>Delete</button>`; 
-      // tblBody.innerHTML = row;
-      fid.innerHTML = id;
-      fname.innerHTML = name;
-      furl.innerHTML = url
+// function renderHtml(){
+chrome.storage.local.get(["payload"], function ({ payload }) {
+  console.log("dataaaaaaaa:::", payload.id, payload.name, payload.url);
+  const arr = ["ID", "NAME", "URL"]
+  let trHtml = "";
+  arr.forEach((key) => {
+    trHtml = `<tr>
+  <th>${key}</th>
+  </tr>`;
+    tblHead.innerHTML = trHtml;
+  });
+  const htmlElem = `<tr>
+                        <td id="idData">${payload.id}<button id="userId">Delete</button></td>
+                        <td id="nameData">${payload.name}<button id="userName">Delete</button></td>
+                        <td id="urlData">${payload.url}<button id="userUrl">Delete</button></td>
+                        </tr>`;
+  tblBody.innerHTML = htmlElem;
 
+  //Removing the user id
+  document.getElementById("userId").addEventListener("click", function () {
+    console.log("working or not");
+    let items = chrome.storage.local.get(["payload"]);
+    console.log("data contains in items", items);
+    console.log("value of payload", payload);
+    // console.log(keyArr);
+    keyIdRemove("id", payload);
+    if (payload.id == undefined)
+      document.getElementById("idData").style.display = "none";
+  });
+  //Removing the user name
+  document.getElementById("userName").addEventListener("click", function () {
+    console.log("working or not");
+    let items = chrome.storage.local.get(["payload"]);
+    console.log("data contains in items", items);
+    console.log("value of payload", payload);
+    // console.log(keyArr);
+    keyIdRemove("name", payload);
+    if (payload.name == undefined)
+      document.getElementById("nameData").style.display = "none";
+  });
+
+  //Removing the user url
+  document.getElementById("userUrl").addEventListener("click", function () {
+    console.log("working or not");
+    let items = chrome.storage.local.get(["payload"]);
+    console.log("data contains in items", items);
+    console.log("value of payload", payload);
+    // console.log(keyArr);
+    keyIdRemove("url", payload);
+    if (payload.url == undefined)
+      document.getElementById("urlData").style.display = "none";
+  });
+
+  //remove function
+  function keyIdRemove(param, payload) {
+    let keyArr = Object.keys(payload);
+    let obj = {};
+    keyArr.forEach((key) => {
+      if (key != param) {
+        obj[key] = payload[key];
+      }
     });
-    // payload.forEach(({id, name, url}) => {
-    //   const idOfElement = document.getElementById(`"${id}"`);
-    //   console.log("id of element :::: ", idOfElement);
-    // })
+    console.log("object value:::", obj);
+    chrome.storage.local.set({ payload: obj }, function () {
+      console.log("Value is set to " + obj);
+    });
+  }
 });
-
-
-const removeId = (e) => {
-  e.preventDefault();
-  console.log("working");
-}
+// }
