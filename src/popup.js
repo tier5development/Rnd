@@ -38,6 +38,10 @@ async function showTable () {
         tableStr += '<tr><td>Profile Name: </td><td>'+userDetails.faceBookId+'</td><td><button id="faceBookId">Delete</button></td></tr>'; 
       }
 
+      if (userDetails.nickName) {
+        tableStr += '<tr><td>Nick Name: </td><td>'+userDetails.nickName+'</td><td><button id="nickName">Delete</button></td></tr>'; 
+      }
+
       if (userDetails.userName) {
         tableStr += '<tr><td>Profile Name: </td><td>'+userDetails.userName+'</td><td><button id="userName">Delete</button></td></tr>'; 
       }
@@ -59,12 +63,20 @@ async function populateTable () {
 
 
 $('body').on('click', '#profileName', async function () {
+  let text = "Do you want to delete profile name?";
+  if (!confirm(text)) {
+    return;
+  }
   let resultStatus = await getParameter(['userDetails']);
 
-  let userDetails = {}
+  let userDetails = {};
 
   if (resultStatus.data.userDetails.faceBookId) {
     userDetails.faceBookId = resultStatus.data.userDetails.faceBookId;
+  }
+
+  if (resultStatus.data.userDetails.nickName) {
+    userDetails.nickName = resultStatus.data.userDetails.nickName;
   }
 
   if (resultStatus.data.userDetails.userName) {
@@ -78,12 +90,20 @@ $('body').on('click', '#profileName', async function () {
 });
 
 $('body').on('click', '#faceBookId', async function () {
+  let text = "Do you want to delete FaceBook Id?";
+  if (!confirm(text)) {
+    return;
+  }
   let resultStatus = await getParameter(['userDetails']);
 
   let userDetails = {}
 
   if (resultStatus.data.userDetails.profileName) {
     userDetails.profileName = resultStatus.data.userDetails.profileName;
+  }
+
+  if (resultStatus.data.userDetails.nickName) {
+    userDetails.nickName = resultStatus.data.userDetails.nickName;
   }
 
   if (resultStatus.data.userDetails.faceBookId) {
@@ -96,12 +116,47 @@ $('body').on('click', '#faceBookId', async function () {
 });
 
 $('body').on('click', '#userName', async function () {
+  let text = "Do you want to delete username?";
+  if (!confirm(text)) {
+    return;
+  }
   let resultStatus = await getParameter(['userDetails']);
 
   let userDetails = {}
 
   if (resultStatus.data.userDetails.profileName) {
     userDetails.profileName = resultStatus.data.userDetails.profileName;
+  }
+
+  if (resultStatus.data.userDetails.nickName) {
+    userDetails.nickName = resultStatus.data.userDetails.nickName;
+  }
+
+  if (resultStatus.data.userDetails.faceBookId) {
+    userDetails.faceBookId = resultStatus.data.userDetails.faceBookId;
+  }
+
+  var keyObj = { 'userDetails': userDetails };
+  await setParameter(keyObj);
+
+  showTable();
+});
+
+$('body').on('click', '#nickName', async function () {
+  let text = "Do you want to delete nickName?";
+  if (!confirm(text)) {
+    return;
+  }
+  let resultStatus = await getParameter(['userDetails']);
+
+  let userDetails = {}
+
+  if (resultStatus.data.userDetails.profileName) {
+    userDetails.profileName = resultStatus.data.userDetails.profileName;
+  }
+
+  if (resultStatus.data.userDetails.userName) {
+    userDetails.userName = resultStatus.data.userDetails.userName;
   }
 
   if (resultStatus.data.userDetails.faceBookId) {

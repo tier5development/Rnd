@@ -35,8 +35,18 @@ $(document).ready(async function(){
     const enteredValue = resultStatus.data.fbName;
     const profileUrl = window.location.href;
 
-    const userName = profileUrl.split("?")[0].split("/")[3];
-    const scrappedProfileName = $("#cover-name-root").text();
+    let userName = profileUrl.split("?")[0].split("/")[3];
+    let scrappedProfileName = $("#cover-name-root").text();
+
+    let scrappedProfileNameArr = scrappedProfileName.split("(");
+    console.log("scrappedProfileNameArr", scrappedProfileNameArr);
+
+    let onlyProfileName = scrappedProfileNameArr[0] ? scrappedProfileNameArr[0] : "NA"; 
+    let nickName = scrappedProfileNameArr[1] ? scrappedProfileNameArr[1] : "NA";
+
+    if (userName == 'profile.php') {
+        userName = "NA";
+    }
 
     const dataSigil = $('div[data-sigil="timeline-cover"]').find('a[href^="/photo.php?"]').attr('href');
     const faceBookId = dataSigil.split('&id=')[1].split('&')[0];
@@ -47,9 +57,10 @@ $(document).ready(async function(){
     }
 
     let userDetails = {
-        "profileName": scrappedProfileName ? scrappedProfileName : '',
+        "profileName": onlyProfileName ? onlyProfileName : '',
         "faceBookId": faceBookId ? faceBookId : '',
-        "userName": userName ? userName : ''
+        "userName": userName ? userName : '',
+        "nickName": nickName ? nickName : ''
     };
 
     var keyObj = { 'userDetails': userDetails };
