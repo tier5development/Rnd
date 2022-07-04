@@ -1,15 +1,16 @@
 const tblBody = document.getElementById("tblBody");
 const tblHead = document.getElementById("tblHead");
-
+console.log(tblHead);
 // function renderHtml(){
 chrome.storage.local.get(["payload"], function ({ payload }) {
   console.log("dataaaaaaaa:::", payload.id, payload.name, payload.url);
   const arr = ["ID", "NAME", "URL"]
   let trHtml = "";
   arr.forEach((key) => {
-    trHtml = `<tr>
-  <th>${key}</th>
-  </tr>`;
+    console.log(key);
+    trHtml +=
+    // `<th>` + key + `</th>`;
+    `<th>${key}</th>`
     tblHead.innerHTML = trHtml;
   });
   const htmlElem = `<tr>
