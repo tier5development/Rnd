@@ -3,16 +3,10 @@ const tblHead = document.getElementById("tblHead");
 console.log(tblHead);
 // function renderHtml(){
 chrome.storage.local.get(["payload"], function ({ payload }) {
+  console.log("payload data top:::",payload);
   console.log("dataaaaaaaa:::", payload.id, payload.name, payload.url);
-  const arr = ["ID", "NAME", "URL"]
-  let trHtml = "";
-  arr.forEach((key) => {
-    console.log(key);
-    trHtml +=
-    // `<th>` + key + `</th>`;
-    `<th>${key}</th>`
-    tblHead.innerHTML = trHtml;
-  });
+  appendTableHead();
+  appendTableBody(payload)
   const htmlElem = `<tr>
                         <td id="idData">${payload.id}<button id="userId">Delete</button></td>
                         <td id="nameData">${payload.name}<button id="userName">Delete</button></td>
@@ -44,9 +38,9 @@ chrome.storage.local.get(["payload"], function ({ payload }) {
   });
 
   //Removing the user url
-  document.getElementById("userUrl").addEventListener("click", function () {
+  document.getElementById("userUrl").addEventListener("click", async function () {
     console.log("working or not");
-    let items = chrome.storage.local.get(["payload"]);
+    let items = await chrome.storage.local.get(["payload"]);
     console.log("data contains in items", items);
     console.log("value of payload", payload);
     // console.log(keyArr);
@@ -71,3 +65,45 @@ chrome.storage.local.get(["payload"], function ({ payload }) {
   }
 });
 // }
+
+
+function appendTableHead(){
+  const arr = ["ID", "NAME", "URL"]
+  let trHtml = "";
+  arr.forEach((key) => {
+    console.log(key);
+    trHtml +=
+    // `<th>` + key + `</th>`;
+    `<th>${key}</th>`
+    tblHead.innerHTML = trHtml;
+  });
+}
+
+function appendTableBody(payload){
+ let tbody = '';
+ const keys = Object.keys(payload);
+ console.log("keys value:::", keys);
+ keys.forEach(key => {
+   tbody += `<td id="idData">${key}<button id="userId">Delete</button></td>`
+   tblBody.innerHTML = tbody;
+ })
+}
+
+
+
+
+
+/*
+
+function appendChild(payload){
+  let th="";
+  let td="";
+
+  const keys=Object.keys(payload);
+  keys.forEach(key=>{
+    th += `<th>${key}</th>`
+  })
+
+}
+
+*/
