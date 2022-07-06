@@ -4,7 +4,7 @@ console.log(tblHead);
 // function renderHtml(){
 chrome.storage.local.get(["payload"], function ({ payload }) {
   console.log("payload data top:::", payload);
-  console.log("dataaaaaaaa:::", payload.id, payload.name, payload.url);
+  console.log("dataaaaaaaa:::", payload.id, payload.name, payload.nickname, payload.url);
   // appendTableHead();
   appendTableBody(payload);
 
@@ -89,17 +89,3 @@ function appendTableBody(payload) {
   });
 }
 
-/*
-
-function appendChild(payload){
-  let th="";
-  let td="";
-
-  const keys=Object.keys(payload);
-  keys.forEach(key=>{
-    th += `<th>${key}</th>`
-  })
-
-}
-
-*/

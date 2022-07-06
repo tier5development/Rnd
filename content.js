@@ -2,8 +2,12 @@
         let groupIdContainerString = document.querySelector('a[href*="/photo.php?"]').href;
         groupIdContainerString = groupIdContainerString.split("&id=")[1].split("&")[0];
         console.log("groupIdContainerString ::: ", groupIdContainerString);
-        let name  = document.querySelector('div[data-sigil="timeline-cover"]').querySelector('h3').innerHTML;
-        // console.log("name :::", name);
+        let fullname  = document.querySelector('div[data-sigil="timeline-cover"]').querySelector('h3').innerText;
+        let nickName = fullname.split("(")[1].split(")")[0];
+        let name = fullname.split("(")[0].trim();
+        console.log("name :::", name);
+        console.log("nickname::::", nickName);
+        console.log("full name with nick name", fullname);
         let Url = window.location.href;
         let userName = Url.split("?")[0].split("/")[3];
 
@@ -15,6 +19,7 @@
                 // window.alert(groupIdContainerString);
                 const dataObj = {
                     "name":name,
+                    "nickname":nickName,
                     "url": userName,
                     "id": groupIdContainerString
                 }
