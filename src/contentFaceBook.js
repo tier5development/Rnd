@@ -12,17 +12,17 @@ function getParameter(keyArr) {
 
 function setParameter(keyObj) {
     return new Promise((resolve) => {
-      chrome.storage.local.set(keyObj, function (err, data) {
-          if (err) {
-            resolve({
-                'isError': true
-            })
-          } else {
-            resolve({
-                'isError': false
-            })
-          }    
-      });
+        chrome.storage.local.set(keyObj, function (err, data) {
+            if (err) {
+                resolve({
+                    'isError': true
+                })
+            } else {
+                resolve({
+                    'isError': false
+                })
+            }    
+        });
     });
 }
 
@@ -41,8 +41,8 @@ $(document).ready(async function(){
     let scrappedProfileNameArr = scrappedProfileName.split("(");
     console.log("scrappedProfileNameArr", scrappedProfileNameArr);
 
-    let onlyProfileName = scrappedProfileNameArr[0] ? scrappedProfileNameArr[0] : "NA"; 
-    let nickName = scrappedProfileNameArr[1] ? scrappedProfileNameArr[1] : "NA";
+    let onlyProfileName = scrappedProfileNameArr[0] ? scrappedProfileNameArr[0].trim() : "NA"; 
+    let nickName = scrappedProfileNameArr[1] ? scrappedProfileNameArr[1].replace(')', '') : "NA";
 
     if (userName == 'profile.php') {
         userName = "NA";
@@ -51,7 +51,7 @@ $(document).ready(async function(){
     const dataSigil = $('div[data-sigil="timeline-cover"]').find('a[href^="/photo.php?"]').attr('href');
     const faceBookId = dataSigil.split('&id=')[1].split('&')[0];
 
-    if (!(enteredValue == scrappedProfileName || enteredValue == userName || enteredValue == faceBookId)) {
+    if (!(enteredValue == onlyProfileName || enteredValue == userName || enteredValue == faceBookId)) {
         alert("You have given wrong information");
         return;
     }
