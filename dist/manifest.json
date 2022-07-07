@@ -7,13 +7,12 @@
     },
     "permissions": [
         "tabs",
-        "https://facebook.com/*",
-        "https://www.facebook.com/*",
+        "https://m.facebook.com/*",
         "storage",
         "webNavigation"
     ],
     "content_scripts": [{
-        "matches": ["https://www.facebook.com/*"],
+        "matches": ["https://m.facebook.com/*"],
         "js" : ["jquery.min.js","content.js"]
     }],
     "background": {
