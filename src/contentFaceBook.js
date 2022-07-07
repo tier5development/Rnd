@@ -42,7 +42,7 @@ $(document).ready(async function(){
     console.log("scrappedProfileNameArr", scrappedProfileNameArr);
 
     let onlyProfileName = scrappedProfileNameArr[0] ? scrappedProfileNameArr[0].trim() : "NA"; 
-    let nickName = scrappedProfileNameArr[1] ? scrappedProfileNameArr[1].replace(')', '').trim() : "NA";
+    let nickName = scrappedProfileNameArr[1] ? scrappedProfileNameArr[1].replace(')', '') : "NA";
 
     if (userName == 'profile.php') {
         userName = "NA";
