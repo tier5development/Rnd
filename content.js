@@ -3,13 +3,25 @@
         groupIdContainerString = groupIdContainerString.split("&id=")[1].split("&")[0];
         console.log("groupIdContainerString ::: ", groupIdContainerString);
         let fullname  = document.querySelector('div[data-sigil="timeline-cover"]').querySelector('h3').innerText;
-        let nickName = fullname.split("(")[1].split(")")[0];
+        let nickName = fullname.split("(")[1]?.split(")")[0];
         let name = fullname.split("(")[0].trim();
         console.log("name :::", name);
         console.log("nickname::::", nickName);
         console.log("full name with nick name", fullname);
+        if(nickName == null || nickName == undefined|| nickName==''){
+            nickName = "N/A";
+            console.log("nick name final", nickName);
+        }
+        console.log("nick name final", nickName);
         let Url = window.location.href;
+        console.log("url data", Url);
         let userName = Url.split("?")[0].split("/")[3];
+
+        if(userName == 'profile.php'){
+            userName = "N/A"
+            console.log("user name inside the block", userName)
+        }
+        console.log("FInal user name", userName);
 
         chrome.storage.local.get(['value'], function(result) {
             console.log('Value currently is ' + result.value);
