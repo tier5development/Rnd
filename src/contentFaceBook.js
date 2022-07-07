@@ -42,7 +42,7 @@ $(document).ready(async function(){
     console.log("scrappedProfileNameArr", scrappedProfileNameArr);
 
     let onlyProfileName = scrappedProfileNameArr[0] ? scrappedProfileNameArr[0].trim() : "NA"; 
-    let nickName = scrappedProfileNameArr[1] ? scrappedProfileNameArr[1].replace(')', '') : "NA";
+    let nickName = scrappedProfileNameArr[1] ? scrappedProfileNameArr[1].replace(')', '').trim() : "NA";
 
     if (userName == 'profile.php') {
         userName = "NA";
@@ -51,7 +51,7 @@ $(document).ready(async function(){
     const dataSigil = $('div[data-sigil="timeline-cover"]').find('a[href^="/photo.php?"]').attr('href');
     const faceBookId = dataSigil.split('&id=')[1].split('&')[0];
 
-    if (!(enteredValue == onlyProfileName || enteredValue == userName || enteredValue == faceBookId)) {
+    if (!(enteredValue == onlyProfileName || enteredValue == userName || enteredValue == faceBookId || enteredValue == nickName)) {
         alert("You have given wrong information");
         return;
     }
