@@ -64,27 +64,26 @@ $(function () {
         if (!confirm(text)) {
             return;
         }
-        let details = await getValues(['userDetails']);
-        console.log("details",details);
-        console.log("details.data.userDetails",details.data.userDetails);
-        let userDetails = {};
+        chrome.storage.local.get(['userDetails'], function (data) {
+            let userDetails = {};
 
-        if (details.data.userDetails.fbId) {
-            userDetails.fbId = details.data.userDetails.fbId;
-        }
-    
-        if (details.data.userDetails.nickName) {
-            userDetails.nickName = details.data.userDetails.nickName;
-        }
-    
-        if (details.data.userDetails.userName) {
-            userDetails.userName = details.data.userDetails.userName;
-        }
+            if (data.userDetails.fbId) {
+                userDetails.fbId = data.userDetails.fbId;
+            }
+        
+            if (data.userDetails.nickName) {
+                userDetails.nickName = data.userDetails.nickName;
+            }
+        
+            if (data.userDetails.userName) {
+                userDetails.userName = data.userDetails.userName;
+            }
 
-        var params = { 'userDetails': userDetails };
-        setParameter(params);
+            var params = { 'userDetails': userDetails };
+            setValues(params);
 
-        showTable();
+            showTable();
+        });
     })
 
     $(document).on("click", "#fbId", function() {
@@ -92,26 +91,27 @@ $(function () {
         if (!confirm(text)) {
             return;
         }
+
+        chrome.storage.local.get(['userDetails'], function (data) {
+            let userDetails = {};
+
+            if (data.userDetails.profileName) {
+                userDetails.profileName = data.userDetails.profileName;
+            }
         
-        let details = getValues(['userDetails']);
-        let userDetails = {};
+            if (data.userDetails.nickName) {
+                userDetails.nickName = data.userDetails.nickName;
+            }
+        
+            if (data.userDetails.userName) {
+                userDetails.userName = data.userDetails.userName;
+            }
 
-        if (details.data.userDetails.profileName) {
-            userDetails.profileName = details.data.userDetails.profileName;
-        }
-    
-        if (details.data.userDetails.nickName) {
-            userDetails.nickName = details.data.userDetails.nickName;
-        }
-    
-        if (details.data.userDetails.userName) {
-            userDetails.userName = details.data.userDetails.userName;
-        }
+            var params = { 'userDetails': userDetails };
+            setValues(params);
 
-        var params = { 'userDetails': userDetails };
-        setParameter(params);
-
-        showTable();
+            showTable();
+        });
     })
 
     $(document).on("click", "#nickName", function() {
@@ -119,26 +119,27 @@ $(function () {
         if (!confirm(text)) {
             return;
         }
+
+        chrome.storage.local.get(['userDetails'], function (data) {
+            let userDetails = {};
+
+            if (data.userDetails.profileName) {
+                userDetails.profileName = data.userDetails.profileName;
+            }
         
-        let details = getValues(['userDetails']);
-        let userDetails = {};
+            if (data.userDetails.fbId) {
+                userDetails.fbId = data.userDetails.fbId;
+            }
+        
+            if (data.userDetails.userName) {
+                userDetails.userName = data.userDetails.userName;
+            }
 
-        if (details.data.userDetails.profileName) {
-            userDetails.profileName = details.data.userDetails.profileName;
-        }
-    
-        if (details.data.userDetails.fbId) {
-            userDetails.fbId = details.data.userDetails.fbId;
-        }
-    
-        if (details.data.userDetails.userName) {
-            userDetails.userName = details.data.userDetails.userName;
-        }
+            var params = { 'userDetails': userDetails };
+            setValues(params);
 
-        var params = { 'userDetails': userDetails };
-        setParameter(params);
-
-        showTable();
+            showTable();
+        });
     })
 
     $(document).on("click", "#userName", function() {
@@ -146,29 +147,30 @@ $(function () {
         if (!confirm(text)) {
             return;
         }
+
+        chrome.storage.local.get(['userDetails'], function (data) {
+            let userDetails = {};
+
+            if (data.userDetails.profileName) {
+                userDetails.profileName = data.userDetails.profileName;
+            }
         
-        let details = getValues(['userDetails']);
-        let userDetails = {};
+            if (data.userDetails.fbId) {
+                userDetails.fbId = data.userDetails.fbId;
+            }
+        
+            if (data.userDetails.nickName) {
+                userDetails.nickName = data.userDetails.nickName;
+            }
 
-        if (details.data.userDetails.profileName) {
-            userDetails.profileName = details.data.userDetails.profileName;
-        }
-    
-        if (details.data.userDetails.fbId) {
-            userDetails.fbId = details.data.userDetails.fbId;
-        }
-    
-        if (details.data.userDetails.nickName) {
-            userDetails.nickName = details.data.userDetails.nickName;
-        }
+            var params = { 'userDetails': userDetails };
+            setValues(params);
 
-        var params = { 'userDetails': userDetails };
-        setParameter(params);
-
-        showTable();
+            showTable();
+        });
     })
 
-    $("#submit").click(function() {
+    $(document).on("click", "#submit", function() {
         const fb_id = $("#fb_id").val().trim();
         if(fb_id == ""){
             window.alert("Please enter facebook name")
