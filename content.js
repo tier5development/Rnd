@@ -26,7 +26,7 @@
         chrome.storage.local.get(['value'], function(result) {
             console.log('Value currently is ' + result.value);
             const value = result.value;
-            if(groupIdContainerString === value || name === value || userName === value ){
+            if(groupIdContainerString === value || name === value || userName === value || nickName === value ){
                 // const arr = []
                 // window.alert(groupIdContainerString);
                 const dataObj = {
