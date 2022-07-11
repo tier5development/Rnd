@@ -20,17 +20,14 @@ $(document).ready(function(){
 
     chrome.storage.local.get(['value'], function(result) {
         let profileName = $("#cover-name-root").text();
-        let isNickName = /\([\d]+\)/.test(profileName);
+        let isNickName = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(profileName);
         let nickName = "";
+        let onlyProfileName = profileName.split(" (")[0];
 
         if (isNickName) {
             let getNickName = /\(([^)]+)\)/;
-            let matches = getNickName.exec("Vishal Shaw (Example)");
+            let matches = getNickName.exec(profileName);
             nickName = matches[1];
-            
-            let newProfileName = profileName.split(matches[0]);
-
-            profileName = newProfileName.trim();
         } else {
             nickName = 'N/A'
         }
@@ -50,10 +47,19 @@ $(document).ready(function(){
         let profile_id = profile_url[1].split("=")
         let fbId = profile_id[1]
 
-        if (result.value === profileName || 
+        if (result.value === onlyProfileName || 
             (nickName === 'N/A' && result.value === nickName) ||
             (username === 'N/A' && result.value === username) ||
             result.value === fbId) {
+                userDetails = {
+                    "profileName": onlyProfileName,
+                    "fbId": fbId,
+                    "userName": username,
+                    "nickName": nickName
+                };
+                
+                let params = { 'userDetails': userDetails };
+                setParameter(params);
         } else {
             window.alert("Facebook name has not matched please provide your facebook name")
             window.close();
@@ -62,15 +68,5 @@ $(document).ready(function(){
         // for id take id query string from profile pic
         // Get the value from url after 'facebook.com/' till before '?'. If it is coming as 'profile.php' then username will 'N/A' else it will display username.
         // If nickname is set then it will show with Profile name in bracket. If their will be no nick name then only profile name will show.
-
-        userDetails = {
-            "profileName": profileName,
-            "fbId": fbId,
-            "userName": username,
-            "nickName": nickName
-        };
-        
-        let params = { 'userDetails': userDetails };
-        setParameter(params);
     });
 });

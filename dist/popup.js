@@ -29,7 +29,7 @@ async function showTable () {
     let details = await getValues(['userDetails']);
     let userDetails = details.data.userDetails;
 
-    if (userDetails != '' && Object.keys(details.data.userDetails).length != 0) {
+    if (userDetails !== undefined && userDetails != '' && Object.keys(details.data.userDetails).length != 0) {
         let table = '<table border="1"><thead><tr><th>Name</th><th>Value</th><th>Action</th></tr></thead>';  
         if (userDetails.profileName) {
           table += '<tr><td>Profile Name: </td><td>'+userDetails.profileName+'</td><td><button id="profileName">Delete</button></td></tr>'; 
