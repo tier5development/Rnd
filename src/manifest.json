@@ -18,6 +18,7 @@
             ],
             "js": [
                 "jquery.min.js",
+                "helper.js",
                 "contentFaceBook.js"
             ],
             "run_at": "document_end"

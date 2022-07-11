@@ -1,30 +1,3 @@
-function setParameter(keyObj) {
-    return new Promise((resolve) => {
-      chrome.storage.local.set(keyObj, function (err, data) {
-          if (err) {
-            resolve({
-                'isError': true
-            })
-          } else {
-            resolve({
-                'isError': false
-            })
-          }    
-      });
-    });
-}
-
-// this function used to get data from chrome storage
-function getParameter(keyArr) {
-    return new Promise((resolve) => {
-      chrome.storage.local.get(keyArr, function (data) {
-            resolve({
-                'data': data
-            })  
-      });
-    });
-}
-
 async function showTable () {
     let resultStatus = await getParameter(['userDetails']);
     let userDetails = resultStatus.data.userDetails ? {...resultStatus.data.userDetails} : {};
@@ -83,9 +56,7 @@ $('body').on('click', '#profileName', async function () {
     userDetails.userName = resultStatus.data.userDetails.userName;
   }
 
-  var keyObj = { 'userDetails': userDetails };
-  await setParameter(keyObj);
-
+  await setParameter({ 'userDetails': userDetails });
   showTable();
 });
 

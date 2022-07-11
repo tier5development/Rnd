@@ -1,33 +1,4 @@
 
-// this function used to get data from chrome storage
-// function getParameter(keyArr) {
-//     return new Promise((resolve) => {
-//       chrome.storage.local.get(keyArr, function (data) {
-//             resolve({
-//                 'data': data
-//             })  
-//       });
-//     });
-// }
-
-// function setParameter(keyObj) {
-//     return new Promise((resolve) => {
-//         chrome.storage.local.set(keyObj, function (err, data) {
-//             if (err) {
-//                 resolve({
-//                     'isError': true
-//                 })
-//             } else {
-//                 resolve({
-//                     'isError': false
-//                 })
-//             }    
-//         });
-//     });
-// }
-
-const { getParameter, setParameter } = require("./helper.js");
-
 $(document).ready(async function(){
     var resultStatus = await getParameter(['fbName']);
 
