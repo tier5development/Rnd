@@ -62,7 +62,11 @@ function appendTableBody(payload) {
   let tbody = "";
   let trHtml = "";
   const keys = Object.keys(payload);
-  console.log("keys value:::", keys);
+  console.log("keys value:::", keys.length);
+  if(keys.length == 0 || (payload.id == undefined && payload.name == undefined && payload.nickname == undefined && payload.url == undefined)){
+    location.href = "popup.html";
+    return;
+  }
   keys.forEach((key) => {
     trHtml += `<th>${key}</th>`;
 
@@ -72,8 +76,12 @@ function appendTableBody(payload) {
   tblBody.innerHTML = tbody;
 
   document.querySelectorAll(".deleteBtn").forEach((btns) => {
+   
     btns.addEventListener("click", function (e) {
       console.log("getting click or not");
+      if (!confirm("Do you want to delete?")) {
+        return;
+      }
       const obj = {};
       keys.forEach((key) => {
         if (payload[key] != e.srcElement.id) {
@@ -83,6 +91,8 @@ function appendTableBody(payload) {
         chrome.storage.local.set({ payload: obj }, function () {
           console.log("Value is set to " + obj);
           appendTableBody(payload);
+          location.reload();
+          
         });
       });
     });
