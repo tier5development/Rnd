@@ -1,36 +1,35 @@
 
 // this function used to get data from chrome storage
-function getParameter(keyArr) {
-    return new Promise((resolve) => {
-      chrome.storage.local.get(keyArr, function (data) {
-            resolve({
-                'data': data
-            })  
-      });
-    });
-}
+// function getParameter(keyArr) {
+//     return new Promise((resolve) => {
+//       chrome.storage.local.get(keyArr, function (data) {
+//             resolve({
+//                 'data': data
+//             })  
+//       });
+//     });
+// }
 
-function setParameter(keyObj) {
-    return new Promise((resolve) => {
-        chrome.storage.local.set(keyObj, function (err, data) {
-            if (err) {
-                resolve({
-                    'isError': true
-                })
-            } else {
-                resolve({
-                    'isError': false
-                })
-            }    
-        });
-    });
-}
+// function setParameter(keyObj) {
+//     return new Promise((resolve) => {
+//         chrome.storage.local.set(keyObj, function (err, data) {
+//             if (err) {
+//                 resolve({
+//                     'isError': true
+//                 })
+//             } else {
+//                 resolve({
+//                     'isError': false
+//                 })
+//             }    
+//         });
+//     });
+// }
 
+const { getParameter, setParameter } = require("./helper.js");
 
 $(document).ready(async function(){
-
-    var keyArr = ['fbName'];
-    var resultStatus = await getParameter(keyArr);
+    var resultStatus = await getParameter(['fbName']);
 
     const enteredValue = resultStatus.data.fbName;
     const profileUrl = window.location.href;
@@ -56,15 +55,12 @@ $(document).ready(async function(){
         return;
     }
 
-    let userDetails = {
+    const userDetails = {
         "profileName": onlyProfileName ? onlyProfileName : '',
         "faceBookId": faceBookId ? faceBookId : '',
         "userName": userName ? userName : '',
         "nickName": nickName ? nickName : ''
     };
 
-    var keyObj = { 'userDetails': userDetails };
-    await setParameter(keyObj);
-
-    console.log("faceBookId", faceBookId);
+    await setParameter({ 'userDetails': userDetails });
 });
