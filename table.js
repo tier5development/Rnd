@@ -92,7 +92,6 @@ function appendTableBody(payload) {
           console.log("Value is set to " + obj);
           appendTableBody(payload);
           location.reload();
-          
         });
       });
     });
