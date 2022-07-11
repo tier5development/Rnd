@@ -83,6 +83,7 @@ function appendTableBody(payload) {
         chrome.storage.local.set({ payload: obj }, function () {
           console.log("Value is set to " + obj);
           appendTableBody(payload);
+          location.reload();
         });
       });
     });
