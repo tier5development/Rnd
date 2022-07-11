@@ -19,7 +19,5 @@ chrome.storage.local.get(["payload"], function ({ payload }) {
     if(payload.length !=0){
         location.href = "table.html"
     }
-    else if(payload.id == undefined && payload.name == undefined && payload.nickname == undefined && payload.url == undefined){
-        location.href = "popup.html"
-    }
+    
 })
