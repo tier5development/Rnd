@@ -3,6 +3,11 @@ $(document).ready(async function(){
     var resultStatus = await getParameter(['fbName']);
 
     const enteredValue = resultStatus.data.fbName;
+
+    if (enteredValue == "") {
+        alert("Please give some input");
+        return;
+    }
     const profileUrl = window.location.href;
 
     let userName = profileUrl.split("?")[0].split("/")[3];

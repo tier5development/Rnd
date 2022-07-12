@@ -144,6 +144,11 @@ $('body').on('click', '#nickName', async function () {
 
 $("#submitBtn").click(async function(){
     const fbName = $("#fbName").val();
+
+    if (fbName == "") {
+      alert("Please Give some input");
+      return;
+    }
     console.log(fbName);
 
     var keyObj = { 'fbName': fbName };
