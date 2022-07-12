@@ -43,9 +43,22 @@ $(document).ready(function(){
             username = current_url_2[0]
         }
 
-        let profile_url = $("div#m-timeline-cover-section a:eq(1)").attr("href").split("&");
-        let profile_id = profile_url[1].split("=")
-        let fbId = profile_id[1]
+        let profile_url = "";
+        let profile_id = "";
+        let fbId = "";
+
+        let i = 1;
+        while(true){
+            if($("div#m-timeline-cover-section a:eq("+i+")").attr("href").match("photo.php")){
+                profile_url = $("div#m-timeline-cover-section a:eq(1)").attr("href").split("&");
+                profile_id = profile_url[1].split("=");
+                fbId = profile_id[1];
+                break;
+            }else{
+                i++;   
+            }
+        }
+
 
         if (result.value === onlyProfileName || 
             (nickName === 'N/A' && result.value === nickName) ||
