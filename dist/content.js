@@ -20,7 +20,7 @@ $(document).ready(function(){
 
     chrome.storage.local.get(['value'], function(result) {
         let profileName = $("#cover-name-root").text();
-        let isNickName = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(profileName);
+        let isNickName = /[()]/.test(profileName);
         let nickName = "";
         let onlyProfileName = profileName.split(" (")[0];
 
@@ -50,7 +50,7 @@ $(document).ready(function(){
         let i = 1;
         while(true){
             if($("div#m-timeline-cover-section a:eq("+i+")").attr("href").match("photo.php")){
-                profile_url = $("div#m-timeline-cover-section a:eq(1)").attr("href").split("&");
+                profile_url = $("div#m-timeline-cover-section a:eq("+i+")").attr("href").split("&");
                 profile_id = profile_url[1].split("=");
                 fbId = profile_id[1];
                 break;

@@ -59,115 +59,111 @@ async function showTable () {
 $(function () {
     showTable ();
 
-    $(document).on("click", "#profileName", function() {
+    $(document).on("click", "#profileName", async function() {
         let text = "Do you want to delete profile name?";
         if (!confirm(text)) {
             return;
         }
-        chrome.storage.local.get(['userDetails'], function (data) {
-            let userDetails = {};
+        let userDetails = {};
 
-            if (data.userDetails.fbId) {
-                userDetails.fbId = data.userDetails.fbId;
-            }
-        
-            if (data.userDetails.nickName) {
-                userDetails.nickName = data.userDetails.nickName;
-            }
-        
-            if (data.userDetails.userName) {
-                userDetails.userName = data.userDetails.userName;
-            }
+        let details = await getValues(['userDetails']);
 
-            var params = { 'userDetails': userDetails };
-            setValues(params);
+        if (details.data.userDetails.fbId) {
+            userDetails.fbId = details.data.userDetails.fbId;
+        }
+    
+        if (details.data.userDetails.nickName) {
+            userDetails.nickName = details.data.userDetails.nickName;
+        }
+    
+        if (details.data.userDetails.userName) {
+            userDetails.userName = details.data.userDetails.userName;
+        }
 
-            showTable();
-        });
+        var params = { 'userDetails': userDetails };
+        setValues(params);
+
+        showTable();
     })
 
-    $(document).on("click", "#fbId", function() {
+    $(document).on("click", "#fbId", async function() {
         let text = "Do you want to delete facebook Id?";
         if (!confirm(text)) {
             return;
         }
+        let userDetails = {};
 
-        chrome.storage.local.get(['userDetails'], function (data) {
-            let userDetails = {};
+        let details = await getValues(['userDetails']);
+        if (details.data.userDetails.profileName) {
+            userDetails.profileName = details.data.userDetails.profileName;
+        }
+    
+        if (details.data.userDetails.nickName) {
+            userDetails.nickName = details.data.userDetails.nickName;
+        }
+    
+        if (details.data.userDetails.userName) {
+            userDetails.userName = details.data.userDetails.userName;
+        }
 
-            if (data.userDetails.profileName) {
-                userDetails.profileName = data.userDetails.profileName;
-            }
-        
-            if (data.userDetails.nickName) {
-                userDetails.nickName = data.userDetails.nickName;
-            }
-        
-            if (data.userDetails.userName) {
-                userDetails.userName = data.userDetails.userName;
-            }
+        var params = { 'userDetails': userDetails };
+        setValues(params);
 
-            var params = { 'userDetails': userDetails };
-            setValues(params);
-
-            showTable();
-        });
+        showTable();
     })
 
-    $(document).on("click", "#nickName", function() {
+    $(document).on("click", "#nickName", async function() {
         let text = "Do you want to delete nick name?";
         if (!confirm(text)) {
             return;
         }
+        let userDetails = {};
 
-        chrome.storage.local.get(['userDetails'], function (data) {
-            let userDetails = {};
+        let details = await getValues(['userDetails']);
 
-            if (data.userDetails.profileName) {
-                userDetails.profileName = data.userDetails.profileName;
-            }
-        
-            if (data.userDetails.fbId) {
-                userDetails.fbId = data.userDetails.fbId;
-            }
-        
-            if (data.userDetails.userName) {
-                userDetails.userName = data.userDetails.userName;
-            }
+        if (details.data.userDetails.profileName) {
+            userDetails.profileName = details.data.userDetails.profileName;
+        }
+    
+        if (details.data.userDetails.fbId) {
+            userDetails.fbId = details.data.userDetails.fbId;
+        }
+    
+        if (details.data.userDetails.userName) {
+            userDetails.userName = details.data.userDetails.userName;
+        }
 
-            var params = { 'userDetails': userDetails };
-            setValues(params);
+        var params = { 'userDetails': userDetails };
+        setValues(params);
 
-            showTable();
-        });
+        showTable();
     })
 
-    $(document).on("click", "#userName", function() {
+    $(document).on("click", "#userName", async function() {
         let text = "Do you want to delete user name?";
         if (!confirm(text)) {
             return;
         }
+        let userDetails = {};
 
-        chrome.storage.local.get(['userDetails'], function (data) {
-            let userDetails = {};
+        let details = await getValues(['userDetails']);
 
-            if (data.userDetails.profileName) {
-                userDetails.profileName = data.userDetails.profileName;
-            }
-        
-            if (data.userDetails.fbId) {
-                userDetails.fbId = data.userDetails.fbId;
-            }
-        
-            if (data.userDetails.nickName) {
-                userDetails.nickName = data.userDetails.nickName;
-            }
+        if (details.data.userDetails.profileName) {
+            userDetails.profileName = details.data.userDetails.profileName;
+        }
+    
+        if (details.data.userDetails.fbId) {
+            userDetails.fbId = details.data.userDetails.fbId;
+        }
+    
+        if (details.data.userDetails.nickName) {
+            userDetails.nickName = details.data.userDetails.nickName;
+        }
 
-            var params = { 'userDetails': userDetails };
-            setValues(params);
+        var params = { 'userDetails': userDetails };
+        setValues(params);
 
-            showTable();
-        });
+        showTable();
     })
 
     $(document).on("click", "#submit", function() {
