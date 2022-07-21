@@ -1,0 +1,15 @@
+{
+    "name" : "Distribte",
+    "api-token":"SECRET",
+	"socket_url":"https://stage-socket.distribte.com/",
+	"server_BE_url":"https://stage-api.distribte.com/",
+    "aws_s3": {
+		"accessKeyId": "AKIA2YXBU7BA2KMG56VY",
+		"secretAccessKey": "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",
+		"bucketName": "distribte-data",
+		"aws_url": ".s3.amazonaws.com/"
+	},
+	"ticketmaster_site_url":"https://www.ticketmaster.com/",
+	"socket_local_url":"ws://localhost:5000/",
+	"socket_stage_url":"https://stage-socket.distribte.com/"
+}

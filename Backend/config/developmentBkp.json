@@ -1,0 +1,11 @@
+{
+    "name" : "Distribte",
+    "api-token":"SECRET",
+	"socket_url":"https://socket.distribte.com/",
+    "aws_s3": {
+		"accessKeyId": "AKIA2YXBU7BA2KMG56VY",
+		"secretAccessKey": "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",
+		"bucketName": "distribte-data",
+		"aws_url": ".s3.amazonaws.com/"
+	}
+}
