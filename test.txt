@@ -1,0 +1,19 @@
+Hello there. Hope you're doing good.
+
+Please follow all steps one by one.
+
+1. Create a new branch from this branch with your name. E.g. tawio_git_test
+2. Create two files in your branch. Names of the files should be yourname.txt and a.txt. E.g. parita.txt and a.txt
+3. Inside yourname.txt file add some intro about yourself.
+4. Inside a.txt file write, "Edited by <Your Name>". E.g. Edited by Tashin
+5. Commit these two files on your branch and push it to the remote. Give commit message as "This commit made by <Your name>"
+6. After 5th point done, please checkout to git_test branch and merge your code and push.
+
+** Make sure on git_test branch git log history is staying linear.**
+
+Which means after Initial commit on this branch there will be only one commit from your side. So at the end of your test on git_test branch only 5 commits should be there. Intial commit and then 4 other commit message from 4 of you.
+
+
+You have 30 minutes to complete your test.
+
+Best of luck!
