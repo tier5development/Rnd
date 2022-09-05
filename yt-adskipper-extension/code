@@ -1,0 +1,19 @@
+
+
+window.onload = () => {
+    
+    var observer = new MutationObserver((mutations) => {
+        mutations.forEach(function (mutation) {
+        
+
+
+            if (mutation.target && mutation.target.innerText && mutation.target.innerText.indexOf('Skip Ads') != -1) {
+                mutation.target.click();
+                console.log("Ad Skipped");
+            }
+
+        });
+    })
+    observer.observe(document.body, {attributes:true, subtree:true, childList:true, characterData:true });
+
+}

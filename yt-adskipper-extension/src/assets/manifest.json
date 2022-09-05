@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "YT-AdSkipper",
+    "version": "0.1",
+  
+    "icons":{
+        "48":"logo48.png",
+        "128":"logo128.png"
+    },
+    "action":{
+        "default_icon":{
+            "48":"logo48.png",
+        "128":"logo128.png"
+        },
+        "default_title":"YouTube Auto-Adskip",
+        "default_popup":"popup.html"
+    }
+}
