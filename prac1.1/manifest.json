@@ -1,0 +1,30 @@
+{
+    "manifest_version":2,
+
+    "name":"Testing",
+    "description":"Playing around",
+    "version":"1.0",
+
+    "browser_action":
+        {
+            "default_popup":"popup.html",
+            "default_icon":"logo.png"
+        },
+    "icons":{
+        "64":"logo.png"
+    },
+    "content_scripts":[
+        {
+            "matches":["http://*/*","https://*/*"],
+            "js":["myScript.js"]
+        }
+    ],
+    "background":{
+        "scripts":["background.js"]
+    },
+    "chrome_url_overrides":{
+        "newtab":"newTab.html"
+    }
+   
+    
+}
