@@ -1,0 +1,23 @@
+{
+    "manifest_version":2,
+    "version":"1.0",
+    "name":"Budget",
+    "description":"Calculate the budget",
+    "icons":{
+        "128":"logo.png"
+    },
+    "browser_action":{
+        "default_icon":"logo.png",
+        "default_popup":"popup.html"
+    },
+    "background":{
+        "scripts":["eventPage.js"],
+        "persistent":false
+    },
+    "options_page":"options.html",
+    "permissions":[
+        "storage",
+        "notifications",
+        "contextMenus"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "manifest_version":2,
+    "version":"1.0",
+    "name":"Exploring Extensions",
+    "description":"Practising",
+    "icons":{
+        "128":"./logo.png"
+    },
+    "browser_action":{
+        "default_popup":"popup.html",
+        "default_icon":"/logo.png",
+        "default_title":"Archi's extensions"
+    },
+    "permissions":[
+        "tabs"
+    ]
+}
